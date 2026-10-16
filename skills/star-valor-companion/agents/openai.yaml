@@ -1,0 +1,4 @@
+interface:
+  display_name: "Star Valor Companion"
+  short_description: "Inspect ships and plan trades using the local CLI"
+  default_prompt: "Use $star-valor-companion to inspect my ship and find the best cargo sale."

@@ -73,7 +73,7 @@ class Worker(threading.Thread):
 
 
 class Companion(tk.Tk):
-    def __init__(self,start_worker=True):
+    def __init__(self,start_worker=True,start_paused=False):
         super().__init__()
         self.title('Star Valor Companion'); self.geometry('1140x840'); self.minsize(960,740)
         self.configure(bg=BG)
@@ -86,7 +86,9 @@ class Companion(tk.Tk):
         window_state.restore(self,window_state.load(self._window_path))
         self.protocol('WM_DELETE_WINDOW',self.close)
         if start_worker:
-            self.worker=Worker(self.events); self.worker.start()
+            self.worker=Worker(self.events)
+            if start_paused:self.worker.pause_event.set();self.pause_button.configure(text='Resume')
+            self.worker.start()
             self.trade_worker=TradeWorker(self.events);self.trade_worker.start()
             self.sale_worker=TradeWorker(self.events,SaleReader,'sales','sale_status');self.sale_worker.start()
             self.buy_worker=TradeWorker(self.events,BuyReader,'purchases','buy_status');self.buy_worker.start()
@@ -390,6 +392,9 @@ def main():
     parser.add_argument('--probe',action='store_true',help='Read one live snapshot to JSON, then exit')
     parser.add_argument('--fresh',action='store_true',help='Ignore the connection cache and rediscover Mono metadata')
     parser.add_argument('--output',type=Path,help='JSON path for --probe')
+    parser.add_argument('--tab',default='Overview',choices=['Overview','Equipment','Ship modifications','Trading','Sell cargo','Buy items','Memory map'],help='Initially selected tab')
+    parser.add_argument('--paused',action='store_true',help='Start with live reads paused')
+    parser.add_argument('--keep-on-top',action='store_true',help='Keep the window above other windows')
     args=parser.parse_args(); setup_logging()
     if args.probe:
         conn=Connection(lambda text,p:print(f'{p:.0%} {text}',file=sys.stderr),threading.Event())
@@ -400,7 +405,10 @@ def main():
             else: print(output)
         finally: conn.close()
     else:
-        app=Companion()
+        app=Companion(start_paused=args.paused)
+        for tab in app.tabs.tabs():
+            if app.tabs.tab(tab,'text')==args.tab:app.tabs.select(tab);break
+        if args.keep_on_top:app.topmost.set(True);app.attributes('-topmost',True)
         try: app.mainloop()
         finally:
             if app.worker: app.worker.shutdown(); app.worker.join(timeout=2)

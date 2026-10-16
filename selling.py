@@ -11,6 +11,20 @@ RARITY_PRICE=[.4,1,2,5,10,12]
 QUALITIES=['Grey','White','Green','Blue','Purple','Orange']
 
 
+def load_allow_discard(path):
+    try:
+        settings=json.loads(Path(path).read_text(encoding='utf-8'))
+        return isinstance(settings,dict) and settings.get('allow_discard') is True
+    except (OSError,ValueError):return False
+
+
+def save_allow_discard(path,enabled):
+    path=Path(path);path.parent.mkdir(parents=True,exist_ok=True)
+    temporary=path.with_suffix('.tmp')
+    temporary.write_text(json.dumps({'allow_discard':bool(enabled)},indent=2),encoding='utf-8')
+    temporary.replace(path)
+
+
 def resale_price(base,item_type,skill_bonus,trade_mod):
     if base is None or base<0:return None
     value=base*((.25 if item_type==4 else .1)+skill_bonus)*(1+trade_mod)
@@ -84,6 +98,63 @@ def calculate_sales(data,excluded,allow_discard=False):
     return sorted(plans,key=lambda p:(p['unknown']>0,-p['proceeds'],p['distance'],p['local_distance']))
 
 
+class FleetCargoSnapshot:
+    """Capture each distinct fleet hold; only the active ship supplies shared stash."""
+    MEMBER_FIELDS=['shipData','name','alive','sectorIndex','hangarDocked','dockedStationID']
+
+    def __init__(self,mono,character,active_data,catalog):
+        self.mono=mono;self.character=character
+        self.fleet_list=mono.get(character,'mercenaries')
+        self.members=mono.list(self.fleet_list)
+        self.member_values={obj:mono.selected(obj,self.MEMBER_FIELDS) for obj in self.members}
+        self.sources=[];self.holds=[];self.entries=[]
+        seen_ships=set();seen_holds=set();seen_items=set()
+
+        def add_ship(sd,active,member=None,index=0):
+            if sd in seen_ships:return
+            if not sd:raise MemoryUnavailable('Fleet ship data is loading; refresh cargo again.')
+            seen_ships.add(sd)
+            model=mono.get(sd,'shipModelID')
+            model_name=catalog['ships'].get(str(model),{}).get('name',f'Ship #{model}')
+            captain=mono.string(member['name']) if member and member.get('name') else ''
+            source=dict(id='active' if active else f'fleet:{index}',
+                        name=f'Active · {model_name}' if active else f'Fleet {index+1} · {model_name}'+(f' ({captain})' if captain else ''),
+                        active=active,model_id=model)
+            if member:
+                source.update({k:member[k] for k in ('sectorIndex','hangarDocked','dockedStationID') if k in member})
+            self.sources.append(source)
+            cargo_list=mono.get(sd,'cargo');objects=mono.list(cargo_list)
+            values=[mono.values(obj) for obj in objects]
+            self.holds.append((sd,cargo_list,objects,values))
+            if cargo_list in seen_holds:return
+            seen_holds.add(cargo_list)
+            for obj,ci in zip(objects,values):
+                if obj in seen_items:continue
+                seen_items.add(obj)
+                location=ci['stockStationID']
+                if location!=-1 and not (active and location==-2 and ci['itemType']==3):continue
+                if ci['itemType']==5 or ci['qnt']<=0:continue
+                self.entries.append((ci,source))
+
+        add_ship(active_data,True)
+        for index,obj in enumerate(self.members):
+            member=self.member_values[obj]
+            if member.get('alive') is False:continue
+            if 'shipData' not in member:raise MemoryUnavailable('Unsupported fleet metadata: missing shipData.')
+            add_ship(member['shipData'],False,member,index)
+
+    def validate(self):
+        m=self.mono
+        if m.get(self.character,'mercenaries')!=self.fleet_list or m.list(self.fleet_list)!=self.members:
+            raise MemoryUnavailable('Fleet membership changed during the read; refresh cargo again.')
+        for obj,values in self.member_values.items():
+            if m.selected(obj,self.MEMBER_FIELDS)!=values:
+                raise MemoryUnavailable('Fleet ship changed during the read; refresh cargo again.')
+        for sd,cargo_list,objects,values in self.holds:
+            if m.get(sd,'cargo')!=cargo_list or m.list(cargo_list)!=objects or [m.values(obj) for obj in objects]!=values:
+                raise MemoryUnavailable('Fleet cargo changed during the read; refresh the sale plan.')
+
+
 class SaleReader(TradeReader):
     def read(self):
         data=super().read(include_routes=False)
@@ -138,10 +209,8 @@ class SaleReader(TradeReader):
             return None
 
         inventory={};records={}
-        sd=m.get(ship,'shipData')
-        cargo_objects=m.list(m.get(sd,'cargo'))
-        cargo_snapshot=[m.values(obj) for obj in cargo_objects]
-        for ci in cargo_snapshot:
+        fleet=FleetCargoSnapshot(m,gd['character'],m.get(ship,'shipData'),catalog)
+        for ci,source in fleet.entries:
             typ=ci['itemType'];item=ci['itemID'];rarity=ci['rarity']
             if typ==5:continue
             location=ci['stockStationID']
@@ -156,9 +225,14 @@ class SaleReader(TradeReader):
                 elif typ==4:name=catalog['ships'].get(str(item),{}).get('name',f'Ship #{item}')
                 else:name=f'Crew / item type {typ} #{item}'
                 if typ in (1,2):name+=f' ({QUALITIES[rarity] if 0<=rarity<6 else rarity})'
-                inventory[key]=dict(key=key,name=name,loaded=0,stash=0,item_type=typ,item_id=item,rarity=rarity)
+                inventory[key]=dict(key=key,name=name,loaded=0,active_loaded=0,fleet_loaded=0,stash=0,sources=[],item_type=typ,item_id=item,rarity=rarity)
                 records[key]=[]
             inventory[key]['loaded' if location==-1 else 'stash']+=ci['qnt']
+            if location==-1:inventory[key]['active_loaded' if source['active'] else 'fleet_loaded']+=ci['qnt']
+            storage='cargo' if location==-1 else 'stash'
+            origin=next((s for s in inventory[key]['sources'] if s['id']==source['id'] and s['storage']==storage),None)
+            if origin:origin['quantity']+=ci['qnt']
+            else:inventory[key]['sources'].append(dict(source,storage=storage,quantity=ci['qnt']))
             records[key].append(ci)
         sale_quotes={}
         for station in data['sale_stations']:
@@ -182,7 +256,6 @@ class SaleReader(TradeReader):
                 out[key]=dict(status=status,price=value/quantity if quantity and status=='sell' else None)
         if m.player(c.root)!=(pc,ship) or m.get(game,'currentSectorIndex')!=sector_index:
             raise MemoryUnavailable('Cargo changed during the read; refresh the sale plan.')
-        if m.list(m.get(sd,'cargo'))!=cargo_objects or [m.values(obj) for obj in cargo_objects]!=cargo_snapshot:
-            raise MemoryUnavailable('Inventory changed during the read; refresh the sale plan.')
-        data.update(inventory=list(inventory.values()),quotes=sale_quotes)
+        fleet.validate()
+        data.update(inventory=list(inventory.values()),quotes=sale_quotes,fleet_ships=fleet.sources)
         return data

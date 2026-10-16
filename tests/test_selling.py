@@ -6,7 +6,8 @@ from pathlib import Path
 from unittest.mock import patch
 
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
-from selling import Exclusions, SaleReader, calculate_sales, inventory_rows, resale_price, weapon_price
+from selling import Exclusions, SaleReader, FleetCargoSnapshot, calculate_sales, inventory_rows, resale_price, weapon_price
+from reader import MemoryUnavailable
 
 
 def example():
@@ -83,7 +84,7 @@ class SellingTests(unittest.TestCase):
         class Mono:
             def __init__(self):
                 self.objects={1:{'character':10,'weaponList':0,'shipLoadouts':0,'currentSectorIndex':7},
-                              10:{'SK':11},2:{'stats':20,'shipData':30},20:{'tradeMod':0},30:{'cargo':40},
+                              10:{'SK':11,'mercenaries':0},2:{'stats':20,'shipData':30},20:{'tradeMod':0},30:{'cargo':40,'shipModelID':7},
                               41:dict(itemType=3,itemID=1,rarity=1,qnt=10,stockStationID=-1,extraData=0),
                               42:dict(itemType=3,itemID=1,rarity=1,qnt=20,stockStationID=-2,extraData=0),
                               43:dict(itemType=3,itemID=1,rarity=1,qnt=999,stockStationID=123,extraData=0),
@@ -95,7 +96,7 @@ class SellingTests(unittest.TestCase):
             def array(self,obj,fmt):return [0]*49
             def list(self,obj,*args):return [41,42,43,44] if obj==40 else []
         class Catalog:
-            data=dict(resale_skill_mod=.01,goods={'1':dict(name='Iron',base_price=90)})
+            data=dict(resale_skill_mod=.01,goods={'1':dict(name='Iron',base_price=90)},ships={})
         class Connection:
             mono=Mono();root=99;catalog=Catalog()
         data=example();data['sale_quotes']=[dict(station_id=1,item_id=1,rarity=1,extra=False,mode=-1,price=100)]

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-labelledby="title desc">
+  <title id="title">Star Valor Companion — your ship, your next trade</title>
+  <desc id="desc">Live ship telemetry and market planning. A conceptual route connects your current sector to a buying station and a selling station, the sequence used to rank trade routes.</desc>
+  <rect width="1200" height="360" rx="18" fill="#10171f"/>
+  <g id="identity" font-family="Segoe UI, -apple-system, BlinkMacSystemFont, sans-serif">
+    <text x="56" y="52" font-size="18" font-weight="600" letter-spacing="2" fill="#4ed8b1">STAR VALOR / COMPANION</text>
+    <text x="52" y="127" font-size="64" font-weight="650" letter-spacing="-2" fill="#e5edf5">Your ship. Your next trade.</text>
+    <text x="56" y="173" font-size="25" fill="#93a6b8">Live ship telemetry and market planning. Read-only by design.</text>
+  </g>
+  <g id="trade-route" font-family="Segoe UI, -apple-system, BlinkMacSystemFont, sans-serif">
+    <path d="M72 237 H1118" fill="none" stroke="#93a6b8" stroke-opacity=".35" stroke-width="2"/>
+    <path d="m343 231 7 6-7 6m408-12 7 6-7 6" fill="none" stroke="#4ed8b1" stroke-width="2"/>
+    <circle cx="72" cy="237" r="10" fill="#10171f" stroke="#e5edf5" stroke-width="2"/>
+    <circle cx="490" cy="237" r="10" fill="#10171f" stroke="#4ed8b1" stroke-width="2"/>
+    <circle cx="910" cy="237" r="10" fill="#4ed8b1"/>
+    <text x="56" y="283" font-size="26" font-weight="600" fill="#e5edf5">Your sector</text>
+    <text x="474" y="283" font-size="26" font-weight="600" fill="#e5edf5">Buy station</text>
+    <text x="894" y="283" font-size="26" font-weight="600" fill="#e5edf5">Sell station</text>
+    <text x="56" y="317" font-size="21" fill="#93a6b8">Credits + cargo space</text>
+    <text x="474" y="317" font-size="21" fill="#93a6b8">Stock + purchase price</text>
+    <text x="894" y="317" font-size="21" fill="#93a6b8">Estimated profit</text>
+  </g>
+</svg>

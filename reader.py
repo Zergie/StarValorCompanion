@@ -114,6 +114,10 @@ class ProcessMemory:
         total=sum(r[1] for r in regions) or 1; done=0
         overlap=max(map(len,patterns.values()))-1
         hits={k:[] for k in patterns}
+        # Pointer high bytes are mostly zero, making full-pattern searches slow
+        # in zero-filled heaps. Verify all eight bytes after a selective prefix.
+        searches={k:(v[:4] if len(v)==8 and len(set(v[:4]))>=3 else v)
+                  for k,v in patterns.items()}
         for base,size,_,_ in regions:
             for off in range(0,size,4*1024*1024):
                 if stop.is_set(): raise Cancelled()
@@ -122,9 +126,11 @@ class ProcessMemory:
                 for name,needle in patterns.items():
                     start=0
                     while len(hits[name])<4000:
-                        pos=data.find(needle,start)
+                        pos=data.find(searches[name],start)
                         if pos<0 or pos>=count: break
-                        hits[name].append(base+off+pos); start=pos+1
+                        if searches[name]==needle or data.startswith(needle,pos):
+                            hits[name].append(base+off+pos)
+                        start=pos+1
                 done+=count; progress(done/total)
         if not self.alive(): raise MemoryUnavailable('Star Valor closed during discovery.')
         return hits
@@ -196,15 +202,11 @@ class MonoReader:
         data=self.get(ship,'shipData'); self.expect(data,'SpaceShipData')
         if not self.get(data,'isPlayerCharacter'): raise MemoryUnavailable('Waiting for the player ship.')
         return pc,ship
-    def discover(self,notify,stop):
-        m=self.memory
-        names=m.scan({'name':b'PlayerControl\0'},lambda p:notify('Finding Mono player metadata',p/3),stop)['name']
-        if not names: raise MemoryUnavailable('Load a save in Star Valor, then reconnect.')
-        refs=m.scan({str(p):struct.pack('<Q',p) for p in names},
-                    lambda p:notify('Resolving the player class',(1+p)/3),stop)
+    def _player_classes(self,refs,stop):
         classes=set()
         for matches in refs.values():
             for ref in matches:
+                if stop.is_set(): raise Cancelled()
                 if ref%8: continue
                 klass=ref-0x48
                 try:
@@ -212,19 +214,64 @@ class MonoReader:
                     fs=self.class_fields(klass,False)
                     if any(f.name=='inst' and f.static and not f.literal for f in fs) and any(f.name=='ss' for f in fs): classes.add(klass)
                 except (MemoryUnavailable,struct.error): continue
+        return classes
+
+    def _player_root(self,klass,vt):
+        """Validate a candidate vtable and its current player singleton."""
+        m=self.memory
+        if vt%8 or m.pointer(vt)!=klass or not m.read(vt+0x30,1)[0]&4: return None
+        count=struct.unpack('<i',m.read(klass+0x5c,4))[0]
+        if not 0<=count<10000: return None
+        inst=next(f for f in self.class_fields(klass,False) if f.name=='inst' and f.static and not f.literal)
+        root=m.pointer(vt+0x40+count*8)+inst.offset
+        pc,_=self.player(root)
+        return root if m.pointer(pc)==vt else None
+
+    def _runtime_player_root(self,klass,stop):
+        m=self.memory
+        try: runtime=m.pointer(klass+0xd0)
+        except (MemoryUnavailable,struct.error): return None
+        for offset in range(8,136,8):
+            if stop.is_set(): raise Cancelled()
+            try:
+                vt=m.pointer(runtime+offset)
+                if not m.readable(vt): continue
+                root=self._player_root(klass,vt)
+                if root: return root
+            except (MemoryUnavailable,struct.error): continue
+        return None
+
+    def discover(self,notify,stop):
+        m=self.memory
+        names=m.scan({'name':b'PlayerControl\0'},lambda p:notify('Finding Mono player metadata',p/3),stop)['name']
+        if not names: raise MemoryUnavailable('Load a save in Star Valor, then reconnect.')
+        # Mono metadata is usually near its class-name strings. Bound this
+        # speculative search; unusual layouts still use the complete scan below.
+        local_names=names[:8]; radius=64*1024*1024
+        for i,name in enumerate(local_names):
+            window=(max(0x10000,name-radius),name+radius)
+            refs=m.scan({str(name):struct.pack('<Q',name)},
+                        lambda p:notify('Resolving nearby player metadata',(1+(i+p)/len(local_names))/3),stop,window)
+            for klass in self._player_classes(refs,stop):
+                root=self._runtime_player_root(klass,stop)
+                if root:
+                    notify('Located the active player',1); return root
+        refs=m.scan({str(p):struct.pack('<Q',p) for p in names},
+                    lambda p:notify('Resolving the player class',2/3+p/6),stop)
+        classes=self._player_classes(refs,stop)
         if not classes: raise MemoryUnavailable('Player metadata not ready, or this Mono build is unsupported.')
+        for klass in classes:
+            root=self._runtime_player_root(klass,stop)
+            if root:
+                notify('Located the active player',1); return root
         refs=m.scan({str(k):struct.pack('<Q',k) for k in classes},
-                    lambda p:notify('Locating the active player',(2+p)/3),stop)
+                    lambda p:notify('Locating the active player',5/6+p/6),stop)
         for key,matches in refs.items():
-            klass=int(key); inst=next(f for f in self.class_fields(klass,False) if f.name=='inst')
-            count=struct.unpack('<i',m.read(klass+0x5c,4))[0]
-            if not 0<=count<10000: continue
             for vt in matches:
+                if stop.is_set(): raise Cancelled()
                 try:
-                    if vt%8 or not m.read(vt+0x30,1)[0]&4: continue
-                    root=m.pointer(vt+0x40+count*8)+inst.offset
-                    pc,_=self.player(root)
-                    if m.pointer(pc)==vt: return root
+                    root=self._player_root(int(key),vt)
+                    if root: return root
                 except (MemoryUnavailable,struct.error): continue
         raise MemoryUnavailable('No active player ship. Load your save and reconnect.')
 
