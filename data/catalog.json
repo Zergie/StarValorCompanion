@@ -1,0 +1,2801 @@
+{
+  "build": "25793649 / Star Valor 2.2.5a",
+  "equipment": {
+    "0": {
+      "name": "Nuclear Reactor",
+      "space": 2.0,
+      "tech": 1,
+      "price": 330.0
+    },
+    "1": {
+      "name": "Solar Reactor",
+      "space": 1.0,
+      "tech": 1,
+      "price": 150.0
+    },
+    "2": {
+      "name": "Large Nuclear Reactor",
+      "space": 6.0,
+      "tech": 2,
+      "price": 700.0
+    },
+    "3": {
+      "name": "Small Battery",
+      "space": 1.0,
+      "tech": 1,
+      "price": 150.0
+    },
+    "4": {
+      "name": "Large Battery",
+      "space": 4.0,
+      "tech": 2,
+      "price": 690.0
+    },
+    "5": {
+      "name": "Tritanium Plating",
+      "space": 0.0,
+      "tech": 1,
+      "price": 350.0
+    },
+    "6": {
+      "name": "Zortrium Plating",
+      "space": 0.0,
+      "tech": 4,
+      "price": 1036.0
+    },
+    "7": {
+      "name": "Neutronium Plating",
+      "space": 0.0,
+      "tech": 9,
+      "price": 1819.9999999999998
+    },
+    "8": {
+      "name": "Nanomorph Plating",
+      "space": 0.0,
+      "tech": 21,
+      "price": 3877.9999999999995
+    },
+    "9": {
+      "name": "Impulse Drive",
+      "space": 2.0,
+      "tech": 1,
+      "price": 190.0
+    },
+    "10": {
+      "name": "Heavy Impulse Drive",
+      "space": 5.0,
+      "tech": 2,
+      "price": 590.0
+    },
+    "11": {
+      "name": "Lateral Thrusters",
+      "space": 1.0,
+      "tech": 1,
+      "price": 150.0
+    },
+    "12": {
+      "name": "Speed Booster",
+      "space": 1.0,
+      "tech": 1,
+      "price": 290.0
+    },
+    "13": {
+      "name": "Deuterium Warp Drive",
+      "space": 2.0,
+      "tech": 2,
+      "price": 400.0
+    },
+    "14": {
+      "name": "Iridium Warp Drive",
+      "space": 3.0,
+      "tech": 5,
+      "price": 1210.0
+    },
+    "15": {
+      "name": "Neutron Warp Drive",
+      "space": 4.0,
+      "tech": 10,
+      "price": 2090.0
+    },
+    "16": {
+      "name": "Gyroscope",
+      "space": 1.0,
+      "tech": 1,
+      "price": 150.0
+    },
+    "17": {
+      "name": "Shield Generator",
+      "space": 2.0,
+      "tech": 1,
+      "price": 330.0
+    },
+    "18": {
+      "name": "Shield Charger",
+      "space": 1.0,
+      "tech": 1,
+      "price": 360.0
+    },
+    "19": {
+      "name": "Shield Absorber",
+      "space": 3.0,
+      "tech": 2,
+      "price": 860.0
+    },
+    "20": {
+      "name": "Basic Scanner",
+      "space": 1.0,
+      "tech": 1,
+      "price": 150.0
+    },
+    "21": {
+      "name": "Tachyon Scanner",
+      "space": 2.0,
+      "tech": 4,
+      "price": 890.0
+    },
+    "22": {
+      "name": "Neutron Scanner",
+      "space": 2.0,
+      "tech": 5,
+      "price": 960.0
+    },
+    "23": {
+      "name": "Inertial Stabilizer",
+      "space": 1.0,
+      "tech": 1,
+      "price": 290.0
+    },
+    "24": {
+      "name": "Inertial Nullifier",
+      "space": 4.0,
+      "tech": 3,
+      "price": 970.0
+    },
+    "25": {
+      "name": "Battle Computer 1.0",
+      "space": 0.0,
+      "tech": 1,
+      "price": 251.99999999999997
+    },
+    "26": {
+      "name": "Battle Computer 2.0",
+      "space": 0.0,
+      "tech": 4,
+      "price": 1134.0
+    },
+    "27": {
+      "name": "Battle Computer 3.0",
+      "space": 0.0,
+      "tech": 8,
+      "price": 2310.0
+    },
+    "28": {
+      "name": "Fusion Reactor",
+      "space": 2.0,
+      "tech": 8,
+      "price": 1450.0
+    },
+    "29": {
+      "name": "Large Fusion Reactor",
+      "space": 6.0,
+      "tech": 12,
+      "price": 1960.0
+    },
+    "30": {
+      "name": "Spotlight",
+      "space": 0.0,
+      "tech": 1,
+      "price": 251.99999999999997
+    },
+    "31": {
+      "name": "Large Gyroscope",
+      "space": 4.0,
+      "tech": 2,
+      "price": 830.0
+    },
+    "32": {
+      "name": "Large Lateral Thrusters",
+      "space": 4.0,
+      "tech": 3,
+      "price": 690.0
+    },
+    "33": {
+      "name": "Repair Drone Bay",
+      "space": 2.0,
+      "tech": 3,
+      "price": 750.0
+    },
+    "34": {
+      "name": "Attack Drone Bay",
+      "space": 2.0,
+      "tech": 4,
+      "price": 890.0
+    },
+    "35": {
+      "name": "Heatsink",
+      "space": 2.0,
+      "tech": 3,
+      "price": 540.0
+    },
+    "36": {
+      "name": "Impact Absorber",
+      "space": 3.0,
+      "tech": 3,
+      "price": 720.0
+    },
+    "37": {
+      "name": "Impact Booster",
+      "space": 4.0,
+      "tech": 4,
+      "price": 970.0
+    },
+    "38": {
+      "name": "Thorium Scanner",
+      "space": 2.0,
+      "tech": 9,
+      "price": 1800.0
+    },
+    "39": {
+      "name": "Impulse Drive Mk.II",
+      "space": 2.0,
+      "tech": 3,
+      "price": 470.0
+    },
+    "40": {
+      "name": "Impulse Drive Mk.III",
+      "space": 2.0,
+      "tech": 7,
+      "price": 1030.0
+    },
+    "41": {
+      "name": "Impulse Drive Mk.IV",
+      "space": 2.0,
+      "tech": 13,
+      "price": 1660.0
+    },
+    "42": {
+      "name": "Heavy Impulse Drive Mk.II",
+      "space": 5.0,
+      "tech": 6,
+      "price": 1640.0
+    },
+    "43": {
+      "name": "Impulse Drive Mk.V",
+      "space": 2.0,
+      "tech": 18,
+      "price": 2430.0
+    },
+    "44": {
+      "name": "Heavy Impulse Drive Mk.III",
+      "space": 5.0,
+      "tech": 12,
+      "price": 2270.0
+    },
+    "45": {
+      "name": "Heavy Shield Generator",
+      "space": 5.0,
+      "tech": 4,
+      "price": 1290.0
+    },
+    "46": {
+      "name": "Shield Generator Mk.II",
+      "space": 2.0,
+      "tech": 3,
+      "price": 820.0
+    },
+    "47": {
+      "name": "Pirate Heatsink",
+      "space": 2.0,
+      "tech": 4,
+      "price": 1170.0
+    },
+    "48": {
+      "name": "Venghi Shield Generator",
+      "space": 2.0,
+      "tech": 5,
+      "price": 1520.0
+    },
+    "49": {
+      "name": "Pirate Impulse Drive",
+      "space": 2.0,
+      "tech": 3,
+      "price": 1170.0
+    },
+    "50": {
+      "name": "Syndicate Scanner",
+      "space": 2.0,
+      "tech": 8,
+      "price": 1520.0
+    },
+    "51": {
+      "name": "Miners Reactor",
+      "space": 2.0,
+      "tech": 7,
+      "price": 1590.0
+    },
+    "52": {
+      "name": "Xentronium Plating",
+      "space": 0.0,
+      "tech": 27,
+      "price": 4956.0
+    },
+    "53": {
+      "name": "Shield Generator Mk.III",
+      "space": 2.0,
+      "tech": 4,
+      "price": 1380.0
+    },
+    "54": {
+      "name": "Heavy Shield Generator Mk.II",
+      "space": 6.0,
+      "tech": 6,
+      "price": 1680.0
+    },
+    "55": {
+      "name": "Shield Charger Mk.II",
+      "space": 1.0,
+      "tech": 5,
+      "price": 1130.0
+    },
+    "56": {
+      "name": "Shield Absorber Mk.II",
+      "space": 3.0,
+      "tech": 5,
+      "price": 1560.0
+    },
+    "57": {
+      "name": "Venghi Light Armor",
+      "space": 0.0,
+      "tech": 18,
+      "price": 3388.0
+    },
+    "58": {
+      "name": "Asteroid Analyzer 1.0",
+      "space": 0.0,
+      "tech": 1,
+      "price": 251.99999999999997
+    },
+    "59": {
+      "name": "Asteroid Analyzer 2.0",
+      "space": 0.0,
+      "tech": 4,
+      "price": 1134.0
+    },
+    "60": {
+      "name": "Asteroid Analyzer 3.0",
+      "space": 0.0,
+      "tech": 8,
+      "price": 2310.0
+    },
+    "61": {
+      "name": "Trader Codex 1.0",
+      "space": 0.0,
+      "tech": 1,
+      "price": 251.99999999999997
+    },
+    "62": {
+      "name": "Trader Codex 2.0",
+      "space": 0.0,
+      "tech": 4,
+      "price": 1134.0
+    },
+    "63": {
+      "name": "Trader Codex 3.0",
+      "space": 0.0,
+      "tech": 8,
+      "price": 2310.0
+    },
+    "64": {
+      "name": "Improved Repair System",
+      "space": 4.0,
+      "tech": 8,
+      "price": 1600.0
+    },
+    "65": {
+      "name": "Light Shield Generator",
+      "space": 1.0,
+      "tech": 1,
+      "price": 150.0
+    },
+    "66": {
+      "name": "Heavy Impulse Drive Mk.IV",
+      "space": 5.0,
+      "tech": 20,
+      "price": 2970.0
+    },
+    "67": {
+      "name": "Ion Reactor",
+      "space": 2.0,
+      "tech": 15,
+      "price": 2430.0
+    },
+    "68": {
+      "name": "Large Ion Reactor",
+      "space": 6.0,
+      "tech": 21,
+      "price": 3080.0
+    },
+    "69": {
+      "name": "Venghi Heavy Shield Generator",
+      "space": 7.0,
+      "tech": 8,
+      "price": 2420.0
+    },
+    "70": {
+      "name": "Huge Battery",
+      "space": 10.0,
+      "tech": 5,
+      "price": 1490.0
+    },
+    "71": {
+      "name": "Small Capacitor",
+      "space": 0.5,
+      "tech": 2,
+      "price": 830.0
+    },
+    "72": {
+      "name": "Large Capacitor",
+      "space": 1.0,
+      "tech": 5,
+      "price": 1900.0
+    },
+    "73": {
+      "name": "Nitro Cooling",
+      "space": 0.5,
+      "tech": 2,
+      "price": 550.0
+    },
+    "74": {
+      "name": "Hyper Cooling",
+      "space": 1.0,
+      "tech": 7,
+      "price": 1480.0
+    },
+    "75": {
+      "name": "Lithrium Skin",
+      "space": 0.0,
+      "tech": 10,
+      "price": 2212.0
+    },
+    "76": {
+      "name": "Venghi Heavy Armor",
+      "space": 0.0,
+      "tech": 25,
+      "price": 4858.0
+    },
+    "77": {
+      "name": "Capital Impulse Drive",
+      "space": 12.0,
+      "tech": 4,
+      "price": 1500.0
+    },
+    "78": {
+      "name": "Capital Impulse Drive Mk.II",
+      "space": 12.0,
+      "tech": 10,
+      "price": 2130.0
+    },
+    "79": {
+      "name": "Capital Impulse Drive Mk.III",
+      "space": 12.0,
+      "tech": 19,
+      "price": 2900.0
+    },
+    "80": {
+      "name": "Hull Reinforcement",
+      "space": 1.0,
+      "tech": 0,
+      "price": 150.0
+    },
+    "81": {
+      "name": "Improved Hull Reinforcement",
+      "space": 2.0,
+      "tech": 4,
+      "price": 1170.0
+    },
+    "82": {
+      "name": "Tractor Beam",
+      "space": 2.0,
+      "tech": 1,
+      "price": 330.0
+    },
+    "83": {
+      "name": "Improved Tractor Beam",
+      "space": 2.0,
+      "tech": 4,
+      "price": 1170.0
+    },
+    "84": {
+      "name": "Cloaking Device",
+      "space": 3.0,
+      "tech": 16,
+      "price": 1700.0
+    },
+    "85": {
+      "name": "Speed Booster Mk.II",
+      "space": 2.0,
+      "tech": 5,
+      "price": 1100.0
+    },
+    "86": {
+      "name": "Speed Booster Mk.III",
+      "space": 4.0,
+      "tech": 11,
+      "price": 2160.0
+    },
+    "87": {
+      "name": "Thorium Warp Drive",
+      "space": 5.0,
+      "tech": 15,
+      "price": 2900.0
+    },
+    "88": {
+      "name": "Debris Analyzer 1.0",
+      "space": 0.0,
+      "tech": 1,
+      "price": 251.99999999999997
+    },
+    "89": {
+      "name": "Debris Analyzer 2.0",
+      "space": 0.0,
+      "tech": 4,
+      "price": 1134.0
+    },
+    "90": {
+      "name": "Debris Analyzer 3.0",
+      "space": 0.0,
+      "tech": 8,
+      "price": 2310.0
+    },
+    "91": {
+      "name": "Pathfinder 1.0",
+      "space": 0.0,
+      "tech": 1,
+      "price": 251.99999999999997
+    },
+    "92": {
+      "name": "Pathfinder 2.0",
+      "space": 0.0,
+      "tech": 4,
+      "price": 1134.0
+    },
+    "93": {
+      "name": "Pathfinder 3.0",
+      "space": 0.0,
+      "tech": 8,
+      "price": 2310.0
+    },
+    "94": {
+      "name": "Blue Holocron",
+      "space": 0.0,
+      "tech": 1,
+      "price": 1036.0
+    },
+    "95": {
+      "name": "Red Holocron",
+      "space": 0.0,
+      "tech": 1,
+      "price": 1036.0
+    },
+    "96": {
+      "name": "Green Holocron",
+      "space": 0.0,
+      "tech": 1,
+      "price": 1036.0
+    },
+    "97": {
+      "name": "Capital Impulse Drive Mk.IV",
+      "space": 12.0,
+      "tech": 27,
+      "price": 3530.0
+    },
+    "98": {
+      "name": "Heavy Tractor Beam",
+      "space": 3.0,
+      "tech": 8,
+      "price": 1700.0
+    },
+    "99": {
+      "name": "Terran Armor",
+      "space": 0.0,
+      "tech": 24,
+      "price": 4760.0
+    },
+    "100": {
+      "name": "Energy Armor",
+      "space": 4.0,
+      "tech": 14,
+      "price": 2440.0
+    },
+    "101": {
+      "name": "Superior Hull Reinforcement",
+      "space": 5.0,
+      "tech": 10,
+      "price": 2480.0
+    },
+    "102": {
+      "name": "Gyroscope Mk.II",
+      "space": 1.0,
+      "tech": 6,
+      "price": 1200.0
+    },
+    "103": {
+      "name": "Shield Charger Mk.III",
+      "space": 1.0,
+      "tech": 12,
+      "price": 2110.0
+    },
+    "104": {
+      "name": "Superior Repair System",
+      "space": 4.0,
+      "tech": 23,
+      "price": 3210.0
+    },
+    "105": {
+      "name": "Optronic Computer",
+      "space": 0.0,
+      "tech": 20,
+      "price": 4368.0
+    },
+    "106": {
+      "name": "Ardonian Warp Drive",
+      "space": 6.0,
+      "tech": 20,
+      "price": 3570.0
+    },
+    "107": {
+      "name": "Optronic Warp Drive",
+      "space": 7.0,
+      "tech": 25,
+      "price": 3820.0
+    },
+    "108": {
+      "name": "Venghi Reactor",
+      "space": 3.0,
+      "tech": 20,
+      "price": 2540.0
+    },
+    "109": {
+      "name": "Venghi Large Reactor",
+      "space": 9.0,
+      "tech": 25,
+      "price": 3690.0
+    },
+    "110": {
+      "name": "Ardonian Small Battery",
+      "space": 1.0,
+      "tech": 10,
+      "price": 2180.0
+    },
+    "111": {
+      "name": "Ardonian Large Battery",
+      "space": 4.0,
+      "tech": 14,
+      "price": 3000.0
+    },
+    "112": {
+      "name": "Ardonian Huge Battery",
+      "space": 10.0,
+      "tech": 18,
+      "price": 3800.0
+    },
+    "113": {
+      "name": "Nodolo's Combat Mod",
+      "space": 2.0,
+      "tech": 12,
+      "price": 1870.0
+    },
+    "114": {
+      "name": "Nodolo's Warp Mod",
+      "space": 2.0,
+      "tech": 12,
+      "price": 1520.0
+    },
+    "115": {
+      "name": "Attack Drone Bay Mk.II",
+      "space": 2.0,
+      "tech": 11,
+      "price": 1730.0
+    },
+    "116": {
+      "name": "Attack Drone Bay Mk.III",
+      "space": 2.0,
+      "tech": 16,
+      "price": 2500.0
+    },
+    "117": {
+      "name": "Repair Drone Bay Mk.II",
+      "space": 2.0,
+      "tech": 9,
+      "price": 1450.0
+    },
+    "118": {
+      "name": "Mining Drone Bay",
+      "space": 2.0,
+      "tech": 7,
+      "price": 1240.0
+    },
+    "119": {
+      "name": "Heavy Mining Drone Bay",
+      "space": 4.0,
+      "tech": 16,
+      "price": 2580.0
+    },
+    "120": {
+      "name": "Basic Mobile Refinery",
+      "space": 2.0,
+      "tech": 3,
+      "price": 540.0
+    },
+    "121": {
+      "name": "Advanced Mobile Refinery",
+      "space": 3.0,
+      "tech": 9,
+      "price": 1490.0
+    },
+    "122": {
+      "name": "PMC Mobile Refinery",
+      "space": 4.0,
+      "tech": 14,
+      "price": 2230.0
+    },
+    "123": {
+      "name": "D. O. Sweeper Drive",
+      "space": 5.0,
+      "tech": 9,
+      "price": 1990.0
+    },
+    "124": {
+      "name": "Gyroscope Mk.III",
+      "space": 1.0,
+      "tech": 12,
+      "price": 2180.0
+    },
+    "125": {
+      "name": "Gyroscope Mk.IV",
+      "space": 1.0,
+      "tech": 19,
+      "price": 3230.0
+    },
+    "126": {
+      "name": "Large Gyroscope Mk.II",
+      "space": 4.0,
+      "tech": 9,
+      "price": 1740.0
+    },
+    "127": {
+      "name": "Large Gyroscope Mk.III",
+      "space": 4.0,
+      "tech": 16,
+      "price": 2580.0
+    },
+    "128": {
+      "name": "Large Gyroscope Mk.IV",
+      "space": 4.0,
+      "tech": 25,
+      "price": 3350.0
+    },
+    "129": {
+      "name": "Heavy Energy Armor",
+      "space": 10.0,
+      "tech": 33,
+      "price": 4780.0
+    },
+    "130": {
+      "name": "Lateral Thrusters Mk.II",
+      "space": 1.0,
+      "tech": 6,
+      "price": 1060.0
+    },
+    "131": {
+      "name": "Lateral Thrusters Mk.III",
+      "space": 1.0,
+      "tech": 12,
+      "price": 2180.0
+    },
+    "132": {
+      "name": "Lateral Thrusters Mk.IV",
+      "space": 1.0,
+      "tech": 19,
+      "price": 3020.0
+    },
+    "133": {
+      "name": "Large Lateral Thrusters Mk.II",
+      "space": 4.0,
+      "tech": 9,
+      "price": 1530.0
+    },
+    "134": {
+      "name": "Large Lateral Thrusters Mk.III",
+      "space": 4.0,
+      "tech": 16,
+      "price": 2580.0
+    },
+    "135": {
+      "name": "Large Lateral Thrusters Mk.IV",
+      "space": 4.0,
+      "tech": 25,
+      "price": 3700.0
+    },
+    "136": {
+      "name": "Ardonian Plating",
+      "space": 0.0,
+      "tech": 40,
+      "price": 5348.0
+    },
+    "137": {
+      "name": "Sensor Amplifier",
+      "space": 1.0,
+      "tech": 1,
+      "price": 220.0
+    },
+    "138": {
+      "name": "Sensor Amplifier Mk.II",
+      "space": 2.0,
+      "tech": 4,
+      "price": 820.0
+    },
+    "139": {
+      "name": "Sensor Amplifier Mk.III",
+      "space": 3.0,
+      "tech": 9,
+      "price": 1630.0
+    },
+    "140": {
+      "name": "Sensor Amplifier Mk.IV",
+      "space": 4.0,
+      "tech": 17,
+      "price": 2510.0
+    },
+    "141": {
+      "name": "Cargo Expansion Module",
+      "space": 0.0,
+      "tech": 3,
+      "price": 1036.0
+    },
+    "142": {
+      "name": "Large Expansion Module",
+      "space": 0.0,
+      "tech": 6,
+      "price": 1819.9999999999998
+    },
+    "143": {
+      "name": "Syndicate Expansion Module",
+      "space": 0.0,
+      "tech": 8,
+      "price": 3094.0
+    },
+    "144": {
+      "name": "Ardonian Cloaking Device",
+      "space": 3.0,
+      "tech": 22,
+      "price": 2400.0
+    },
+    "145": {
+      "name": "Terran Mantle",
+      "space": 3.0,
+      "tech": 29,
+      "price": 3170.0
+    },
+    "146": {
+      "name": "Heavy Impulse Drive Mk.V",
+      "space": 5.0,
+      "tech": 26,
+      "price": 3600.0
+    },
+    "147": {
+      "name": "Pirate Heavy Impulse Drive",
+      "space": 5.0,
+      "tech": 7,
+      "price": 2270.0
+    },
+    "148": {
+      "name": "Capital Impulse Drive Mk.V",
+      "space": 12.0,
+      "tech": 35,
+      "price": 4020.0
+    },
+    "149": {
+      "name": "Pirate Capital Impulse Drive",
+      "space": 12.0,
+      "tech": 11,
+      "price": 2900.0
+    },
+    "150": {
+      "name": "Pirate Speed Booster",
+      "space": 1.0,
+      "tech": 4,
+      "price": 920.0
+    },
+    "151": {
+      "name": "Pirate Heavy Booster",
+      "space": 3.0,
+      "tech": 13,
+      "price": 2120.0
+    },
+    "152": {
+      "name": "Ardonian Mobile Refinery",
+      "space": 3.0,
+      "tech": 12,
+      "price": 1770.0
+    },
+    "153": {
+      "name": "Warp Towage Array",
+      "space": 1.0,
+      "tech": 3,
+      "price": 570.0
+    },
+    "154": {
+      "name": "Heavy Warp Towage Array",
+      "space": 2.0,
+      "tech": 6,
+      "price": 1170.0
+    },
+    "155": {
+      "name": "Venghi Charger",
+      "space": 2.0,
+      "tech": 15,
+      "price": 2570.0
+    },
+    "156": {
+      "name": "Weapon Stabilizer",
+      "space": 0.0,
+      "tech": 5,
+      "price": 1036.0
+    },
+    "157": {
+      "name": "Large Miners Reactor",
+      "space": 6.0,
+      "tech": 14,
+      "price": 2520.0
+    },
+    "158": {
+      "name": "Flux Capacitor",
+      "space": 0.0,
+      "tech": 8,
+      "price": 1819.9999999999998
+    },
+    "159": {
+      "name": "Warp Diverter",
+      "space": 0.0,
+      "tech": 4,
+      "price": 937.9999999999999
+    },
+    "160": {
+      "name": "Flux Accumulator",
+      "space": 1.0,
+      "tech": 7,
+      "price": 1410.0
+    },
+    "161": {
+      "name": "Collector Beam",
+      "space": 1.0,
+      "tech": 3,
+      "price": 570.0
+    },
+    "162": {
+      "name": "PMC Collector Beam",
+      "space": 1.0,
+      "tech": 8,
+      "price": 1830.0
+    },
+    "163": {
+      "name": "Energy Barrier",
+      "space": 1.0,
+      "tech": 5,
+      "price": 710.0
+    },
+    "164": {
+      "name": "Improved Energy Barrier",
+      "space": 1.0,
+      "tech": 12,
+      "price": 1480.0
+    },
+    "165": {
+      "name": "Pirate Protector",
+      "space": 2.0,
+      "tech": 14,
+      "price": 1730.0
+    },
+    "166": {
+      "name": "Ardonian Energy Barrier",
+      "space": 1.0,
+      "tech": 22,
+      "price": 2460.0
+    },
+    "167": {
+      "name": "Turbo Flux Refinery",
+      "space": 2.0,
+      "tech": 8,
+      "price": 1520.0
+    },
+    "168": {
+      "name": "Scavenger Scanner",
+      "space": 2.0,
+      "tech": 3,
+      "price": 820.0
+    },
+    "169": {
+      "name": "Lootfinder 1.0",
+      "space": 0.0,
+      "tech": 1,
+      "price": 251.99999999999997
+    },
+    "170": {
+      "name": "Lootfinder 2.0",
+      "space": 0.0,
+      "tech": 4,
+      "price": 1134.0
+    },
+    "171": {
+      "name": "Lootfinder 3.0",
+      "space": 0.0,
+      "tech": 8,
+      "price": 2310.0
+    },
+    "172": {
+      "name": "Lootfilter",
+      "space": 0.0,
+      "tech": 2,
+      "price": 742.0
+    },
+    "173": {
+      "name": "Advanced Titanium Plating",
+      "space": 0.0,
+      "tech": 3,
+      "price": 644.0
+    },
+    "174": {
+      "name": "Heavy Tritanium Plating",
+      "space": 0.0,
+      "tech": 6,
+      "price": 1428.0
+    },
+    "175": {
+      "name": "Heavy Zortrium Plating",
+      "space": 0.0,
+      "tech": 12,
+      "price": 2506.0
+    },
+    "176": {
+      "name": "Heavy Neutronium Plating",
+      "space": 0.0,
+      "tech": 15,
+      "price": 2898.0
+    },
+    "177": {
+      "name": "Fullerite Plating",
+      "space": 0.0,
+      "tech": 19,
+      "price": 3486.0
+    },
+    "178": {
+      "name": "Heavy Fullerite Plating",
+      "space": 0.0,
+      "tech": 23,
+      "price": 4368.0
+    },
+    "179": {
+      "name": "Heavy Nanomorph Plating",
+      "space": 0.0,
+      "tech": 29,
+      "price": 5054.0
+    },
+    "180": {
+      "name": "Heavy Xentronium Plating",
+      "space": 0.0,
+      "tech": 37,
+      "price": 5250.0
+    },
+    "181": {
+      "name": "Drone Detonator",
+      "space": 1.0,
+      "tech": 4,
+      "price": 640.0
+    },
+    "182": {
+      "name": "Terran Mantle",
+      "space": 3.0,
+      "tech": 29,
+      "price": 3170.0
+    },
+    "183": {
+      "name": "Drone Enhancer: Detonator",
+      "space": 1.0,
+      "tech": 5,
+      "price": 780.0
+    },
+    "184": {
+      "name": "Drone Enhancer: Targeting",
+      "space": 1.0,
+      "tech": 6,
+      "price": 990.0
+    },
+    "185": {
+      "name": "Drone Enhancer: Utility",
+      "space": 1.0,
+      "tech": 7,
+      "price": 1200.0
+    },
+    "186": {
+      "name": "Attack Drone Bay Mk.IV",
+      "space": 3.0,
+      "tech": 22,
+      "price": 3310.0
+    },
+    "187": {
+      "name": "Phase Shifter",
+      "space": 0.0,
+      "tech": 15,
+      "price": 2996.0
+    },
+    "188": {
+      "name": "Attack Drone Bay Mk.II",
+      "space": 2.0,
+      "tech": 11,
+      "price": 1730.0
+    },
+    "189": {
+      "name": "Repair Drone Bay Mk.II",
+      "space": 2.0,
+      "tech": 9,
+      "price": 1450.0
+    },
+    "190": {
+      "name": "Consortium A.I.",
+      "space": 0.0,
+      "tech": 10,
+      "price": 2015.9999999999998
+    },
+    "191": {
+      "name": "Yellow Holocron",
+      "space": 0.0,
+      "tech": 1,
+      "price": 1036.0
+    },
+    "192": {
+      "name": "Purple Holocron",
+      "space": 0.0,
+      "tech": 1,
+      "price": 1036.0
+    },
+    "193": {
+      "name": "Builder Module",
+      "space": 0.0,
+      "tech": 4,
+      "price": 644.0
+    },
+    "194": {
+      "name": "Orange Holocron",
+      "space": 0.0,
+      "tech": 1,
+      "price": 1036.0
+    },
+    "195": {
+      "name": "Mining Drone Bay Mk.II",
+      "space": 2.0,
+      "tech": 10,
+      "price": 1870.0
+    },
+    "196": {
+      "name": "Adaptive Converter",
+      "space": 1.0,
+      "tech": 4,
+      "price": 500.0
+    },
+    "197": {
+      "name": "Improved Adaptive Converter",
+      "space": 1.0,
+      "tech": 9,
+      "price": 1480.0
+    },
+    "198": {
+      "name": "Reactor Stabilizer",
+      "space": 0.0,
+      "tech": 5,
+      "price": 1036.0
+    },
+    "199": {
+      "name": "Reactor Overclocker",
+      "space": 0.0,
+      "tech": 5,
+      "price": 1036.0
+    },
+    "200": {
+      "name": "Simple Repair System",
+      "space": 4.0,
+      "tech": 4,
+      "price": 760.0
+    }
+  },
+  "ships": {
+    "7": {
+      "name": "Space Ranger",
+      "cargo_weight": 138.0,
+      "price": 26474
+    },
+    "5": {
+      "name": "Feisar",
+      "cargo_weight": 43.0,
+      "price": 5761
+    },
+    "8": {
+      "name": "Hauler",
+      "cargo_weight": 148.0,
+      "price": 26224
+    },
+    "3": {
+      "name": "Rokkuita",
+      "cargo_weight": 74.0,
+      "price": 7739
+    },
+    "1": {
+      "name": "Valor",
+      "cargo_weight": 63.0,
+      "price": 7841
+    },
+    "2": {
+      "name": "Hercules",
+      "cargo_weight": 90.5,
+      "price": 8028
+    },
+    "25": {
+      "name": "Mauler",
+      "cargo_weight": 67.0,
+      "price": 11433
+    },
+    "4": {
+      "name": "Wolf",
+      "cargo_weight": 50.2,
+      "price": 7162
+    },
+    "93": {
+      "name": "Hornet",
+      "cargo_weight": 52.8,
+      "price": 6272
+    },
+    "69": {
+      "name": "Kurma",
+      "cargo_weight": 593.0,
+      "price": 468381
+    },
+    "81": {
+      "name": "Empress",
+      "cargo_weight": 354.0,
+      "price": 330733
+    },
+    "78": {
+      "name": "Achilles",
+      "cargo_weight": 458.0,
+      "price": 449795
+    },
+    "74": {
+      "name": "Fortuna",
+      "cargo_weight": 434.0,
+      "price": 349285
+    },
+    "101": {
+      "name": "Testudo",
+      "cargo_weight": 533.0,
+      "price": 515006
+    },
+    "102": {
+      "name": "Aurora",
+      "cargo_weight": 473.0,
+      "price": 395958
+    },
+    "14": {
+      "name": "Juggernaut",
+      "cargo_weight": 420.0,
+      "price": 332447
+    },
+    "82": {
+      "name": "Terror",
+      "cargo_weight": 382.0,
+      "price": 359999
+    },
+    "24": {
+      "name": "Screamer",
+      "cargo_weight": 38.0,
+      "price": 5657
+    },
+    "6": {
+      "name": "Speeder",
+      "cargo_weight": 38.5,
+      "price": 4207
+    },
+    "15": {
+      "name": "Pegasus",
+      "cargo_weight": 34.0,
+      "price": 5071
+    },
+    "10": {
+      "name": "Shark",
+      "cargo_weight": 188.0,
+      "price": 94895
+    },
+    "12": {
+      "name": "Venom",
+      "cargo_weight": 230.0,
+      "price": 89354
+    },
+    "11": {
+      "name": "Beetle",
+      "cargo_weight": 280.0,
+      "price": 93989
+    },
+    "13": {
+      "name": "Claymore",
+      "cargo_weight": 344.0,
+      "price": 331478
+    },
+    "9": {
+      "name": "Eagle",
+      "cargo_weight": 112.0,
+      "price": 25691
+    },
+    "30": {
+      "name": "Walrus",
+      "cargo_weight": 137.0,
+      "price": 39784
+    },
+    "46": {
+      "name": "Defender 6-300",
+      "cargo_weight": 67.0,
+      "price": 10825
+    },
+    "109": {
+      "name": "Akuma",
+      "cargo_weight": 637.0,
+      "price": 1574651
+    },
+    "96": {
+      "name": "Prometheus",
+      "cargo_weight": 769.0,
+      "price": 1903128
+    },
+    "40": {
+      "name": "Dominance",
+      "cargo_weight": 867.0,
+      "price": 1815192
+    },
+    "29": {
+      "name": "Razor",
+      "cargo_weight": 118.0,
+      "price": 32653
+    },
+    "26": {
+      "name": "Triton",
+      "cargo_weight": 63.0,
+      "price": 11907
+    },
+    "41": {
+      "name": "Corsair",
+      "cargo_weight": 448.0,
+      "price": 411309
+    },
+    "38": {
+      "name": "Mule",
+      "cargo_weight": 294.0,
+      "price": 104352
+    },
+    "20": {
+      "name": "Valor Mk.III",
+      "cargo_weight": 79.0,
+      "price": 14324
+    },
+    "19": {
+      "name": "Valor Mk.II",
+      "cargo_weight": 73.5,
+      "price": 10806
+    },
+    "65": {
+      "name": "V4G-A",
+      "cargo_weight": 252.0,
+      "price": 150138
+    },
+    "90": {
+      "name": "Enforcer",
+      "cargo_weight": 249.0,
+      "price": 120659
+    },
+    "63": {
+      "name": "Archimedes",
+      "cargo_weight": 362.0,
+      "price": 175082
+    },
+    "97": {
+      "name": "Condor",
+      "cargo_weight": 289.0,
+      "price": 125159
+    },
+    "95": {
+      "name": "Wizard",
+      "cargo_weight": 271.0,
+      "price": 129425
+    },
+    "70": {
+      "name": "Nightmare",
+      "cargo_weight": 307.0,
+      "price": 151290
+    },
+    "80": {
+      "name": "Valkyrie",
+      "cargo_weight": 257.0,
+      "price": 132903
+    },
+    "55": {
+      "name": "Raven",
+      "cargo_weight": 263.0,
+      "price": 123750
+    },
+    "106": {
+      "name": "Crusader",
+      "cargo_weight": 256.0,
+      "price": 132119
+    },
+    "49": {
+      "name": "Beatle 8-42",
+      "cargo_weight": 159.0,
+      "price": 35737
+    },
+    "50": {
+      "name": "Marco F07",
+      "cargo_weight": 272.0,
+      "price": 121292
+    },
+    "84": {
+      "name": "Taurus",
+      "cargo_weight": 320.0,
+      "price": 128105
+    },
+    "57": {
+      "name": "Dorothy",
+      "cargo_weight": 159.0,
+      "price": 41257
+    },
+    "72": {
+      "name": "Saw",
+      "cargo_weight": 141.0,
+      "price": 40366
+    },
+    "62": {
+      "name": "BadBoy",
+      "cargo_weight": 155.0,
+      "price": 45437
+    },
+    "107": {
+      "name": "Daedalus",
+      "cargo_weight": 284.0,
+      "price": 128763
+    },
+    "73": {
+      "name": "V5C-A",
+      "cargo_weight": 471.0,
+      "price": 446295
+    },
+    "79": {
+      "name": "V5B-A",
+      "cargo_weight": 445.0,
+      "price": 425140
+    },
+    "75": {
+      "name": "Hades",
+      "cargo_weight": 468.0,
+      "price": 443795
+    },
+    "105": {
+      "name": "Artemis",
+      "cargo_weight": 764.0,
+      "price": 1783050
+    },
+    "87": {
+      "name": "Iziko",
+      "cargo_weight": 497.0,
+      "price": 460561
+    },
+    "100": {
+      "name": "Leviathan",
+      "cargo_weight": 1114.0,
+      "price": 1752592
+    },
+    "35": {
+      "name": "Bolder",
+      "cargo_weight": 104.0,
+      "price": 12120
+    },
+    "34": {
+      "name": "Reaper",
+      "cargo_weight": 71.0,
+      "price": 12203
+    },
+    "67": {
+      "name": "Hephaestus",
+      "cargo_weight": 409.0,
+      "price": 415714
+    },
+    "52": {
+      "name": "Horizon A03",
+      "cargo_weight": 474.0,
+      "price": 429813
+    },
+    "104": {
+      "name": "Toupeira",
+      "cargo_weight": 49.8,
+      "price": 5031
+    },
+    "103": {
+      "name": "Posylny",
+      "cargo_weight": 57.6,
+      "price": 5071
+    },
+    "31": {
+      "name": "Driller",
+      "cargo_weight": 47.0,
+      "price": 3672
+    },
+    "36": {
+      "name": "Hawk",
+      "cargo_weight": 139.0,
+      "price": 36014
+    },
+    "53": {
+      "name": "Galaxy",
+      "cargo_weight": 51.0,
+      "price": 7198
+    },
+    "51": {
+      "name": "Pelican H44",
+      "cargo_weight": 317.0,
+      "price": 128794
+    },
+    "47": {
+      "name": "Guardian 4-77",
+      "cargo_weight": 132.0,
+      "price": 44446
+    },
+    "48": {
+      "name": "Magellan 10-10",
+      "cargo_weight": 136.0,
+      "price": 30266
+    },
+    "58": {
+      "name": "V1I-A",
+      "cargo_weight": 45.0,
+      "price": 7817
+    },
+    "27": {
+      "name": "V2F-A",
+      "cargo_weight": 74.5,
+      "price": 14712
+    },
+    "45": {
+      "name": "Squire A22",
+      "cargo_weight": 39.5,
+      "price": 5470
+    },
+    "44": {
+      "name": "Mercury",
+      "cargo_weight": 32.5,
+      "price": 5385
+    },
+    "42": {
+      "name": "Sparrow",
+      "cargo_weight": 59.5,
+      "price": 8197
+    },
+    "60": {
+      "name": "Phantom",
+      "cargo_weight": 71.5,
+      "price": 16116
+    },
+    "23": {
+      "name": "Hound",
+      "cargo_weight": 135.0,
+      "price": 33184
+    },
+    "18": {
+      "name": "Ogre",
+      "cargo_weight": 187.0,
+      "price": 35037
+    },
+    "85": {
+      "name": "Zeus",
+      "cargo_weight": 755.0,
+      "price": 1700250
+    },
+    "76": {
+      "name": "Rising Sun",
+      "cargo_weight": 632.0,
+      "price": 1182099
+    },
+    "86": {
+      "name": "V6B-A",
+      "cargo_weight": 869.0,
+      "price": 2271295
+    },
+    "28": {
+      "name": "Titan",
+      "cargo_weight": 634.0,
+      "price": 1238551
+    },
+    "32": {
+      "name": "Zeep",
+      "cargo_weight": 48.0,
+      "price": 5599
+    },
+    "108": {
+      "name": "Strix",
+      "cargo_weight": 48.0,
+      "price": 5806
+    },
+    "91": {
+      "name": "Warlock",
+      "cargo_weight": 74.5,
+      "price": 12823
+    },
+    "64": {
+      "name": "Mi-laoshu",
+      "cargo_weight": 53.0,
+      "price": 9672
+    },
+    "89": {
+      "name": "Starbeam",
+      "cargo_weight": 67.0,
+      "price": 13171
+    },
+    "99": {
+      "name": "Raccoon",
+      "cargo_weight": 77.2,
+      "price": 14909
+    },
+    "92": {
+      "name": "Shrike",
+      "cargo_weight": 77.0,
+      "price": 19234
+    },
+    "83": {
+      "name": "Isilo",
+      "cargo_weight": 67.5,
+      "price": 14600
+    },
+    "98": {
+      "name": "Beaver",
+      "cargo_weight": 103.0,
+      "price": 16611
+    },
+    "71": {
+      "name": "Dragon",
+      "cargo_weight": 73.0,
+      "price": 14027
+    },
+    "68": {
+      "name": "Lacewing",
+      "cargo_weight": 71.0,
+      "price": 18562
+    },
+    "59": {
+      "name": "Fury",
+      "cargo_weight": 46.5,
+      "price": 7454
+    },
+    "61": {
+      "name": "Sanctuary",
+      "cargo_weight": 796.0,
+      "price": 1666951
+    },
+    "16": {
+      "name": "Seagull",
+      "cargo_weight": 79.0,
+      "price": 11213
+    },
+    "54": {
+      "name": "Theseus",
+      "cargo_weight": 410.0,
+      "price": 100802
+    },
+    "77": {
+      "name": "Bonde",
+      "cargo_weight": 313.0,
+      "price": 100389
+    },
+    "39": {
+      "name": "Donkey",
+      "cargo_weight": 478.0,
+      "price": 384108
+    },
+    "94": {
+      "name": "Thoth",
+      "cargo_weight": 162.0,
+      "price": 95915
+    },
+    "56": {
+      "name": "Geraki",
+      "cargo_weight": 159.0,
+      "price": 61261
+    },
+    "33": {
+      "name": "Fido",
+      "cargo_weight": 50.6,
+      "price": 4875
+    },
+    "43": {
+      "name": "Komb-E",
+      "cargo_weight": 59.0,
+      "price": 5505
+    },
+    "37": {
+      "name": "Scourge",
+      "cargo_weight": 298.0,
+      "price": 115009
+    },
+    "22": {
+      "name": "Goliath",
+      "cargo_weight": 516.0,
+      "price": 370188
+    },
+    "21": {
+      "name": "Luna",
+      "cargo_weight": 36.0,
+      "price": 3726
+    },
+    "17": {
+      "name": "V3G-A",
+      "cargo_weight": 146.0,
+      "price": 45661
+    },
+    "88": {
+      "name": "Dragonfly",
+      "cargo_weight": 147.0,
+      "price": 39928
+    },
+    "66": {
+      "name": "Cerberus",
+      "cargo_weight": 814.0,
+      "price": 1898821
+    },
+    "110": {
+      "name": "Tri-Cerberus",
+      "cargo_weight": 1740.0,
+      "price": 6761832
+    }
+  },
+  "modifications": {
+    "74": {
+      "field": 0,
+      "minSkillRank": 99,
+      "shipEnhancementRank": 1,
+      "hullBonus": 30,
+      "hullMod": 0.0,
+      "asset_name": "074.EnhanceHull_30",
+      "class": "SB_Hull"
+    },
+    "75": {
+      "field": 0,
+      "minSkillRank": 99,
+      "shipEnhancementRank": 2,
+      "hullBonus": 0,
+      "hullMod": 0.07999999821186066,
+      "asset_name": "075.EnhanceHull_8%",
+      "class": "SB_Hull"
+    },
+    "76": {
+      "field": 0,
+      "minSkillRank": 99,
+      "shipEnhancementRank": 3,
+      "hullBonus": 150,
+      "hullMod": 0.10000000149011612,
+      "asset_name": "076.EnhanceHull+150_10%",
+      "class": "SB_Hull"
+    },
+    "77": {
+      "field": 0,
+      "minSkillRank": 99,
+      "shipEnhancementRank": 1,
+      "flatShieldBonus": 45.0,
+      "asset_name": "077.EnhanceShield_45",
+      "class": "SB_ShieldFlat"
+    },
+    "78": {
+      "field": 3,
+      "minSkillRank": 99,
+      "shipEnhancementRank": 1,
+      "flatCargoSpace": 0,
+      "cargoSpaceMod": 0.05000000074505806,
+      "asset_name": "078.EnhanceCargo_5%",
+      "class": "SB_CargoSpace"
+    },
+    "79": {
+      "field": 3,
+      "minSkillRank": 99,
+      "shipEnhancementRank": 1,
+      "flatCargoSpace": 4,
+      "cargoSpaceMod": 0.0,
+      "asset_name": "079.EnhanceCargo_4",
+      "class": "SB_CargoSpace"
+    },
+    "80": {
+      "field": 0,
+      "minSkillRank": 99,
+      "shipEnhancementRank": 1,
+      "ArmorBonus": 18,
+      "ArmorMod": 0.0,
+      "asset_name": "080.EnhanceArmor_18",
+      "class": "SB_Armor"
+    },
+    "81": {
+      "field": 0,
+      "minSkillRank": 99,
+      "shipEnhancementRank": 3,
+      "ArmorBonus": 60,
+      "ArmorMod": 0.0,
+      "asset_name": "081.EnhanceArmor_70",
+      "class": "SB_Armor"
+    },
+    "82": {
+      "field": 0,
+      "minSkillRank": 99,
+      "shipEnhancementRank": 2,
+      "energyBonus": 25.0,
+      "asset_name": "082.EnhanceEnergyGen_25",
+      "class": "SB_Energy"
+    },
+    "83": {
+      "field": 4,
+      "minSkillRank": 99,
+      "shipEnhancementRank": 2,
+      "explodeBoostChance": 100,
+      "explodeBoost": 0.5,
+      "asset_name": "083.EnhanceExplosiveBonus_50%",
+      "class": "SB_ExplosiveChance"
+    },
+    "84": {
+      "field": 0,
+      "minSkillRank": 99,
+      "shipEnhancementRank": 1,
+      "weaponType": 0,
+      "damageBonus": 0.029999999329447746,
+      "asset_name": "084.EnhanceWeaponDmg_3%",
+      "class": "SB_WeaponDmg"
+    },
+    "85": {
+      "field": 6,
+      "minSkillRank": 99,
+      "shipEnhancementRank": 3,
+      "manufacturer": -1,
+      "shipBonuses": [
+        {
+          "m_FileID": 0,
+          "m_PathID": 20333
+        },
+        {
+          "m_FileID": 0,
+          "m_PathID": 20257
+        }
+      ],
+      "asset_name": "085.EnhanceFleetShip_Defense",
+      "class": "SB_FleetShipBonuses"
+    },
+    "86": {
+      "field": 6,
+      "minSkillRank": 99,
+      "shipEnhancementRank": 3,
+      "manufacturer": -1,
+      "shipBonuses": [
+        {
+          "m_FileID": 0,
+          "m_PathID": 20293
+        },
+        {
+          "m_FileID": 0,
+          "m_PathID": 20296
+        }
+      ],
+      "asset_name": "086.EnhanceFleetShip_Offense",
+      "class": "SB_FleetShipBonuses"
+    },
+    "87": {
+      "field": 0,
+      "minSkillRank": 99,
+      "shipEnhancementRank": 3,
+      "hpRegen": 0.009999999776482582,
+      "asset_name": "087.EnhanceHPRegen_1%",
+      "class": "SB_HPRegen"
+    },
+    "88": {
+      "field": 3,
+      "minSkillRank": 99,
+      "shipEnhancementRank": 2,
+      "repairCost": 0.800000011920929,
+      "asset_name": "088.EnhanceRepairCost_-50%",
+      "class": "SB_RepairCost"
+    },
+    "89": {
+      "field": 2,
+      "minSkillRank": 99,
+      "shipEnhancementRank": 1,
+      "scannerBonus": 25,
+      "scannerMod": 0.0,
+      "asset_name": "089.EnhanceScanner_25",
+      "class": "SB_ScannerPower"
+    },
+    "90": {
+      "field": 0,
+      "minSkillRank": 99,
+      "shipEnhancementRank": 2,
+      "shieldBonus": 0.1599999964237213,
+      "asset_name": "090.EnhanceShield_16%",
+      "class": "SB_Shield"
+    },
+    "91": {
+      "field": 5,
+      "minSkillRank": 99,
+      "shipEnhancementRank": 3,
+      "position": -1,
+      "efficiencyBonus": 0.03999999910593033,
+      "asset_name": "091.EnhanceCrewEfficiency_4%",
+      "class": "SB_CrewEfficiency"
+    },
+    "92": {
+      "field": 4,
+      "minSkillRank": 99,
+      "shipEnhancementRank": 2,
+      "rangeBonus": 20,
+      "rangeBonusPerc": 0.0,
+      "asset_name": "092.EnhanceWeaponRange_20",
+      "class": "SB_WeaponRange"
+    },
+    "93": {
+      "field": 0,
+      "minSkillRank": 99,
+      "shipEnhancementRank": 2,
+      "warpDistanceBonus": 0.20000000298023224,
+      "asset_name": "093.EnhanceWarp_20%",
+      "class": "SB_WarpDistance"
+    },
+    "94": {
+      "field": 4,
+      "minSkillRank": 99,
+      "shipEnhancementRank": 2,
+      "flatCooling": 5.0,
+      "asset_name": "094.EnhanceCooling_5",
+      "class": "SB_WeaponCooling"
+    },
+    "95": {
+      "field": 4,
+      "minSkillRank": 99,
+      "shipEnhancementRank": 1,
+      "critialChanceBonus": 4.0,
+      "asset_name": "095.EnhanceWeaponCrit_4%",
+      "class": "SB_WeaponCrit"
+    },
+    "96": {
+      "field": 4,
+      "minSkillRank": 99,
+      "shipEnhancementRank": 1,
+      "criticalDamageBonus": 0.10000000149011612,
+      "asset_name": "096.EnhanceWeaponCritDmg_10%",
+      "class": "SB_WeaponCritDmgBonus"
+    },
+    "97": {
+      "field": 4,
+      "minSkillRank": 99,
+      "shipEnhancementRank": 2,
+      "weaponHeatMod": -0.10000000149011612,
+      "asset_name": "097.EnhanceWeaponHeatGen_-10%",
+      "class": "SB_WeaponHeatGenerated"
+    },
+    "100": {
+      "field": 3,
+      "minSkillRank": 99,
+      "shipEnhancementRank": 1,
+      "weaponType": 5,
+      "damageBonus": 0.10000000149011612,
+      "asset_name": "100.EnhanceMiningLaserDmg_10%",
+      "class": "SB_WeaponDmg"
+    },
+    "101": {
+      "field": 0,
+      "minSkillRank": 99,
+      "shipEnhancementRank": 1,
+      "equipmentID": 161,
+      "asset_name": "101.EnhanceBuiltInCollector",
+      "class": "SB_BuiltInEquipment"
+    },
+    "110": {
+      "field": 0,
+      "minSkillRank": 99,
+      "shipEnhancementRank": 1,
+      "impactBonus": 0.10000000149011612,
+      "asset_name": "110.SB_ImpactDamage",
+      "class": "SB_ImpactDamage"
+    },
+    "116": {
+      "field": 6,
+      "minSkillRank": 99,
+      "shipEnhancementRank": 2,
+      "dmgMod": 0.0,
+      "speedBonus": 15.0,
+      "HPBonus": 0.0,
+      "partsRecovery": 0,
+      "autoTargeting": 0,
+      "explodeOnDestroyMod": 1.0,
+      "asset_name": "116.SB_EnhanceDroneMods_SpeedAndExplode",
+      "class": "SB_DroneModifiers"
+    },
+    "119": {
+      "field": 6,
+      "minSkillRank": 99,
+      "shipEnhancementRank": 1,
+      "dmgMod": 0.0,
+      "speedBonus": 0.0,
+      "HPBonus": 0.0,
+      "partsRecovery": 1,
+      "autoTargeting": 0,
+      "explodeOnDestroyMod": 0.0,
+      "asset_name": "119.SB_EnhanceDroneMods_PartsRecovery",
+      "class": "SB_DroneModifiers"
+    },
+    "120": {
+      "field": 6,
+      "minSkillRank": 99,
+      "shipEnhancementRank": 3,
+      "dmgMod": 1.0,
+      "speedBonus": 0.0,
+      "HPBonus": 60.0,
+      "partsRecovery": 0,
+      "autoTargeting": 0,
+      "explodeOnDestroyMod": 0.0,
+      "asset_name": "120.SB_EnhanceDroneMods_BigBoost",
+      "class": "SB_DroneModifiers"
+    },
+    "122": {
+      "field": 0,
+      "minSkillRank": 99,
+      "shipEnhancementRank": 1,
+      "equipmentID": 181,
+      "asset_name": "122.EnhanceBuiltInDroneDetonator",
+      "class": "SB_BuiltInEquipment"
+    },
+    "123": {
+      "field": 0,
+      "minSkillRank": 99,
+      "shipEnhancementRank": 2,
+      "equipmentID": 188,
+      "asset_name": "123.EnhanceBuiltInAttackDrone",
+      "class": "SB_BuiltInEquipment"
+    },
+    "124": {
+      "field": 0,
+      "minSkillRank": 99,
+      "shipEnhancementRank": 2,
+      "equipmentID": 189,
+      "asset_name": "124.EnhanceBuiltInRepairDrone",
+      "class": "SB_BuiltInEquipment"
+    },
+    "125": {
+      "field": 0,
+      "minSkillRank": 99,
+      "shipEnhancementRank": 2,
+      "equipmentID": 121,
+      "asset_name": "125.EnhanceBuiltInAdvancedRefinery",
+      "class": "SB_BuiltInEquipment"
+    },
+    "126": {
+      "field": 6,
+      "minSkillRank": 99,
+      "shipEnhancementRank": 2,
+      "dmgMod": 0.15000000596046448,
+      "speedBonus": 0.0,
+      "HPBonus": 0.0,
+      "partsRecovery": 0,
+      "autoTargeting": 1,
+      "explodeOnDestroyMod": 0.0,
+      "asset_name": "126.SB_EnhanceDroneMods_Damage",
+      "class": "SB_DroneModifiers"
+    }
+  },
+  "goods": {
+    "0": {
+      "name": "Credit",
+      "weight": 0.0,
+      "base_price": 1.0,
+      "variation": 0.0,
+      "trade_quantity": 100,
+      "kind": 0,
+      "tradable": false
+    },
+    "1": {
+      "name": "Iron",
+      "weight": 1.0,
+      "base_price": 23.0,
+      "variation": 0.5,
+      "trade_quantity": 4000,
+      "kind": 2,
+      "tradable": true
+    },
+    "2": {
+      "name": "Blue Crystal",
+      "weight": 0.25,
+      "base_price": 50.0,
+      "variation": 0.20000000298023224,
+      "trade_quantity": 100,
+      "kind": 1,
+      "tradable": false
+    },
+    "3": {
+      "name": "Red Crystal",
+      "weight": 0.25,
+      "base_price": 80.0,
+      "variation": 0.18000000715255737,
+      "trade_quantity": 100,
+      "kind": 1,
+      "tradable": false
+    },
+    "4": {
+      "name": "Green Crystal",
+      "weight": 0.25,
+      "base_price": 120.0,
+      "variation": 0.1599999964237213,
+      "trade_quantity": 100,
+      "kind": 1,
+      "tradable": false
+    },
+    "5": {
+      "name": "Fruit and Vegetables",
+      "weight": 1.0,
+      "base_price": 68.0,
+      "variation": 0.4000000059604645,
+      "trade_quantity": 1500,
+      "kind": 3,
+      "tradable": true
+    },
+    "6": {
+      "name": "Animal Meat",
+      "weight": 1.0,
+      "base_price": 1000.0,
+      "variation": 0.17000000178813934,
+      "trade_quantity": 800,
+      "kind": 3,
+      "tradable": true
+    },
+    "7": {
+      "name": "Synthetic Meat",
+      "weight": 1.0,
+      "base_price": 220.0,
+      "variation": 0.30000001192092896,
+      "trade_quantity": 1000,
+      "kind": 3,
+      "tradable": true
+    },
+    "8": {
+      "name": "Coffee",
+      "weight": 1.0,
+      "base_price": 480.0,
+      "variation": 0.20000000298023224,
+      "trade_quantity": 500,
+      "kind": 3,
+      "tradable": true
+    },
+    "9": {
+      "name": "Microchips",
+      "weight": 1.0,
+      "base_price": 100.0,
+      "variation": 0.25,
+      "trade_quantity": 3000,
+      "kind": 4,
+      "tradable": true
+    },
+    "10": {
+      "name": "Robotics",
+      "weight": 1.0,
+      "base_price": 590.0,
+      "variation": 0.1599999964237213,
+      "trade_quantity": 600,
+      "kind": 4,
+      "tradable": true
+    },
+    "11": {
+      "name": "Plastics",
+      "weight": 1.0,
+      "base_price": 110.0,
+      "variation": 0.30000001192092896,
+      "trade_quantity": 1500,
+      "kind": 7,
+      "tradable": true
+    },
+    "12": {
+      "name": "Water Purifiers",
+      "weight": 1.0,
+      "base_price": 320.0,
+      "variation": 0.30000001192092896,
+      "trade_quantity": 1000,
+      "kind": 7,
+      "tradable": true
+    },
+    "13": {
+      "name": "Basic Medicine",
+      "weight": 1.0,
+      "base_price": 250.0,
+      "variation": 0.25,
+      "trade_quantity": 1000,
+      "kind": 7,
+      "tradable": true
+    },
+    "14": {
+      "name": "Biotech Implants",
+      "weight": 1.0,
+      "base_price": 3003.0,
+      "variation": 0.07999999821186066,
+      "trade_quantity": 500,
+      "kind": 4,
+      "tradable": true
+    },
+    "15": {
+      "name": "Wine",
+      "weight": 1.0,
+      "base_price": 265.0,
+      "variation": 0.25,
+      "trade_quantity": 700,
+      "kind": 3,
+      "tradable": true
+    },
+    "16": {
+      "name": "Gold",
+      "weight": 1.0,
+      "base_price": 2132.0,
+      "variation": 0.09000000357627869,
+      "trade_quantity": 200,
+      "kind": 2,
+      "tradable": true
+    },
+    "17": {
+      "name": "Explosives",
+      "weight": 1.0,
+      "base_price": 100.0,
+      "variation": 0.30000001192092896,
+      "trade_quantity": 4000,
+      "kind": 6,
+      "tradable": true
+    },
+    "18": {
+      "name": "Energy Cells",
+      "weight": 0.5,
+      "base_price": 25.0,
+      "variation": 0.4000000059604645,
+      "trade_quantity": 15000,
+      "kind": 4,
+      "tradable": true
+    },
+    "19": {
+      "name": "Silver",
+      "weight": 1.0,
+      "base_price": 1040.0,
+      "variation": 0.10000000149011612,
+      "trade_quantity": 300,
+      "kind": 2,
+      "tradable": true
+    },
+    "20": {
+      "name": "Cannon Ammo",
+      "weight": 0.006000000052154064,
+      "base_price": 0.800000011920929,
+      "variation": 0.4000000059604645,
+      "trade_quantity": 30000,
+      "kind": 5,
+      "tradable": true
+    },
+    "21": {
+      "name": "Vulcan Ammo",
+      "weight": 0.0020000000949949026,
+      "base_price": 0.30000001192092896,
+      "variation": 0.4000000059604645,
+      "trade_quantity": 80000,
+      "kind": 5,
+      "tradable": true
+    },
+    "22": {
+      "name": "Missile Ammo",
+      "weight": 0.019999999552965164,
+      "base_price": 2.0,
+      "variation": 0.4000000059604645,
+      "trade_quantity": 40000,
+      "kind": 5,
+      "tradable": true
+    },
+    "23": {
+      "name": "Drone Parts",
+      "weight": 0.5,
+      "base_price": 50.0,
+      "variation": 0.30000001192092896,
+      "trade_quantity": 2500,
+      "kind": 4,
+      "tradable": true
+    },
+    "24": {
+      "name": "Ancient Relic",
+      "weight": 0.0,
+      "base_price": 5000.0,
+      "variation": 0.05000000074505806,
+      "trade_quantity": 1,
+      "kind": 4,
+      "tradable": false
+    },
+    "25": {
+      "name": "Liquid Nitrogen",
+      "weight": 0.5,
+      "base_price": 130.0,
+      "variation": 0.5,
+      "trade_quantity": 800,
+      "kind": 6,
+      "tradable": true
+    },
+    "26": {
+      "name": "Junk",
+      "weight": 1.0,
+      "base_price": 9.0,
+      "variation": 0.6000000238418579,
+      "trade_quantity": 100,
+      "kind": 8,
+      "tradable": false
+    },
+    "27": {
+      "name": "Gray Ore",
+      "weight": 1.0,
+      "base_price": 22.0,
+      "variation": 0.5,
+      "trade_quantity": 100,
+      "kind": 2,
+      "tradable": false
+    },
+    "28": {
+      "name": "Nickel",
+      "weight": 1.0,
+      "base_price": 50.0,
+      "variation": 0.4000000059604645,
+      "trade_quantity": 1500,
+      "kind": 2,
+      "tradable": true
+    },
+    "29": {
+      "name": "Silicon",
+      "weight": 1.0,
+      "base_price": 120.0,
+      "variation": 0.30000001192092896,
+      "trade_quantity": 1500,
+      "kind": 2,
+      "tradable": true
+    },
+    "30": {
+      "name": "Aluminum",
+      "weight": 1.0,
+      "base_price": 58.0,
+      "variation": 0.3499999940395355,
+      "trade_quantity": 3000,
+      "kind": 2,
+      "tradable": true
+    },
+    "31": {
+      "name": "Copper",
+      "weight": 1.0,
+      "base_price": 80.0,
+      "variation": 0.30000001192092896,
+      "trade_quantity": 1500,
+      "kind": 2,
+      "tradable": true
+    },
+    "32": {
+      "name": "Gallium",
+      "weight": 1.0,
+      "base_price": 180.0,
+      "variation": 0.25,
+      "trade_quantity": 400,
+      "kind": 2,
+      "tradable": true
+    },
+    "33": {
+      "name": "Cobalt",
+      "weight": 1.0,
+      "base_price": 105.0,
+      "variation": 0.30000001192092896,
+      "trade_quantity": 3000,
+      "kind": 2,
+      "tradable": true
+    },
+    "34": {
+      "name": "Bismuth",
+      "weight": 1.0,
+      "base_price": 220.0,
+      "variation": 0.20000000298023224,
+      "trade_quantity": 800,
+      "kind": 2,
+      "tradable": true
+    },
+    "35": {
+      "name": "Samarium",
+      "weight": 1.0,
+      "base_price": 480.0,
+      "variation": 0.20000000298023224,
+      "trade_quantity": 100,
+      "kind": 2,
+      "tradable": true
+    },
+    "36": {
+      "name": "Lithium",
+      "weight": 1.0,
+      "base_price": 415.0,
+      "variation": 0.20000000298023224,
+      "trade_quantity": 100,
+      "kind": 2,
+      "tradable": true
+    },
+    "37": {
+      "name": "Titanium",
+      "weight": 1.0,
+      "base_price": 830.0,
+      "variation": 0.18000000715255737,
+      "trade_quantity": 100,
+      "kind": 2,
+      "tradable": true
+    },
+    "38": {
+      "name": "Iridium",
+      "weight": 1.0,
+      "base_price": 1450.0,
+      "variation": 0.15000000596046448,
+      "trade_quantity": 100,
+      "kind": 2,
+      "tradable": true
+    },
+    "39": {
+      "name": "Platinum",
+      "weight": 1.0,
+      "base_price": 2500.0,
+      "variation": 0.07000000029802322,
+      "trade_quantity": 120,
+      "kind": 2,
+      "tradable": true
+    },
+    "40": {
+      "name": "Red Ore",
+      "weight": 1.0,
+      "base_price": 45.0,
+      "variation": 0.4000000059604645,
+      "trade_quantity": 100,
+      "kind": 2,
+      "tradable": false
+    },
+    "41": {
+      "name": "Green Ore",
+      "weight": 1.0,
+      "base_price": 70.0,
+      "variation": 0.4000000059604645,
+      "trade_quantity": 100,
+      "kind": 2,
+      "tradable": false
+    },
+    "42": {
+      "name": "Scrap Metal",
+      "weight": 0.5,
+      "base_price": 80.0,
+      "variation": 0.4000000059604645,
+      "trade_quantity": 100,
+      "kind": 2,
+      "tradable": false
+    },
+    "43": {
+      "name": "Base Component",
+      "weight": 0.10000000149011612,
+      "base_price": 110.0,
+      "variation": 0.5,
+      "trade_quantity": 100,
+      "kind": 13,
+      "tradable": false
+    },
+    "44": {
+      "name": "Fine Component",
+      "weight": 0.10000000149011612,
+      "base_price": 250.0,
+      "variation": 0.30000001192092896,
+      "trade_quantity": 100,
+      "kind": 13,
+      "tradable": false
+    },
+    "45": {
+      "name": "Superior Component",
+      "weight": 0.10000000149011612,
+      "base_price": 600.0,
+      "variation": 0.30000001192092896,
+      "trade_quantity": 100,
+      "kind": 13,
+      "tradable": false
+    },
+    "46": {
+      "name": "Ardonian Component",
+      "weight": 0.10000000149011612,
+      "base_price": 1300.0,
+      "variation": 0.25,
+      "trade_quantity": 100,
+      "kind": 13,
+      "tradable": false
+    },
+    "47": {
+      "name": "Upgrade Kit",
+      "weight": 0.0,
+      "base_price": 550.0,
+      "variation": 0.30000001192092896,
+      "trade_quantity": 100,
+      "kind": 7,
+      "tradable": false
+    },
+    "48": {
+      "name": "Improved Upgrade Kit",
+      "weight": 0.0,
+      "base_price": 900.0,
+      "variation": 0.25,
+      "trade_quantity": 100,
+      "kind": 7,
+      "tradable": false
+    },
+    "49": {
+      "name": "Refined Metal",
+      "weight": 0.5,
+      "base_price": 500.0,
+      "variation": 0.25,
+      "trade_quantity": 100,
+      "kind": 2,
+      "tradable": false
+    },
+    "50": {
+      "name": "Thermal Regulator",
+      "weight": 0.10000000149011612,
+      "base_price": 700.0,
+      "variation": 0.20000000298023224,
+      "trade_quantity": 100,
+      "kind": 4,
+      "tradable": false
+    },
+    "51": {
+      "name": "Transmitter",
+      "weight": 0.10000000149011612,
+      "base_price": 750.0,
+      "variation": 0.20000000298023224,
+      "trade_quantity": 100,
+      "kind": 4,
+      "tradable": false
+    },
+    "52": {
+      "name": "Crystal Chamber",
+      "weight": 0.10000000149011612,
+      "base_price": 500.0,
+      "variation": 0.20000000298023224,
+      "trade_quantity": 100,
+      "kind": 4,
+      "tradable": false
+    },
+    "53": {
+      "name": "Railgun Slug",
+      "weight": 0.009999999776482582,
+      "base_price": 1.5,
+      "variation": 0.4000000059604645,
+      "trade_quantity": 10000,
+      "kind": 5,
+      "tradable": true
+    },
+    "54": {
+      "name": "Blueprint",
+      "weight": 0.0,
+      "base_price": 1000.0,
+      "variation": 0.0,
+      "trade_quantity": 100,
+      "kind": 0,
+      "tradable": false
+    },
+    "55": {
+      "name": "Small Package",
+      "weight": 1.0,
+      "base_price": 1.0,
+      "variation": 0.0,
+      "trade_quantity": 100,
+      "kind": 9,
+      "tradable": false
+    },
+    "56": {
+      "name": "Medium Package",
+      "weight": 5.0,
+      "base_price": 1.0,
+      "variation": 0.0,
+      "trade_quantity": 100,
+      "kind": 9,
+      "tradable": false
+    },
+    "57": {
+      "name": "Large Package",
+      "weight": 20.0,
+      "base_price": 1.0,
+      "variation": 0.0,
+      "trade_quantity": 100,
+      "kind": 9,
+      "tradable": false
+    },
+    "58": {
+      "name": "Construction Component",
+      "weight": 4.0,
+      "base_price": 1000.0,
+      "variation": 0.0,
+      "trade_quantity": 100,
+      "kind": 12,
+      "tradable": false
+    },
+    "59": {
+      "name": "Small Container",
+      "weight": 50.0,
+      "base_price": 1.0,
+      "variation": 0.0,
+      "trade_quantity": 100,
+      "kind": 10,
+      "tradable": false
+    },
+    "60": {
+      "name": "Medium Container",
+      "weight": 100.0,
+      "base_price": 1.0,
+      "variation": 0.0,
+      "trade_quantity": 100,
+      "kind": 10,
+      "tradable": false
+    },
+    "61": {
+      "name": "Large Container",
+      "weight": 200.0,
+      "base_price": 1.0,
+      "variation": 0.0,
+      "trade_quantity": 100,
+      "kind": 10,
+      "tradable": false
+    },
+    "62": {
+      "name": "Fine Construction Component",
+      "weight": 5.0,
+      "base_price": 1600.0,
+      "variation": 0.0,
+      "trade_quantity": 100,
+      "kind": 12,
+      "tradable": false
+    },
+    "63": {
+      "name": "Ice",
+      "weight": 1.0,
+      "base_price": 40.0,
+      "variation": 0.5,
+      "trade_quantity": 2000,
+      "kind": 8,
+      "tradable": true
+    },
+    "64": {
+      "name": "Organic Matter",
+      "weight": 1.0,
+      "base_price": 285.0,
+      "variation": 0.25,
+      "trade_quantity": 2200,
+      "kind": 11,
+      "tradable": true
+    },
+    "65": {
+      "name": "Chemicals",
+      "weight": 1.0,
+      "base_price": 530.0,
+      "variation": 0.20000000298023224,
+      "trade_quantity": 1000,
+      "kind": 6,
+      "tradable": true
+    },
+    "66": {
+      "name": "Computers",
+      "weight": 1.0,
+      "base_price": 1520.0,
+      "variation": 0.10000000149011612,
+      "trade_quantity": 300,
+      "kind": 4,
+      "tradable": true
+    },
+    "67": {
+      "name": "Advanced Composites",
+      "weight": 1.0,
+      "base_price": 370.0,
+      "variation": 0.30000001192092896,
+      "trade_quantity": 1000,
+      "kind": 7,
+      "tradable": true
+    },
+    "68": {
+      "name": "Volatile",
+      "weight": 1.0,
+      "base_price": 80.0,
+      "variation": 0.4000000059604645,
+      "trade_quantity": 1000,
+      "kind": 6,
+      "tradable": true
+    },
+    "69": {
+      "name": "Iron",
+      "weight": 1.0,
+      "base_price": 480.0,
+      "variation": 0.3499999940395355,
+      "trade_quantity": 1000,
+      "kind": 4,
+      "tradable": true
+    },
+    "70": {
+      "name": "Batteries",
+      "weight": 2.0,
+      "base_price": 500.0,
+      "variation": 0.0,
+      "trade_quantity": 100,
+      "kind": 12,
+      "tradable": false
+    }
+  },
+  "stations": {
+    "0": "Civilian Station",
+    "1": "Civilian Station",
+    "2": "Civilian Station",
+    "3": "Civilian Turret",
+    "4": "Civilian Station",
+    "5": "Civilian Station",
+    "6": "Civilian Station",
+    "7": "Civilian Station",
+    "8": "Civilian Relay",
+    "10": "PMC Outpost",
+    "100": "Small Station",
+    "101": "Medium Station",
+    "102": "Large Station",
+    "103": "Basic Turret",
+    "104": "Heavy Turret",
+    "105": "Power Plant",
+    "106": "Mining Station",
+    "107": "Light Beacon",
+    "108": "Factory",
+    "109": "Advanced Mining Station",
+    "11": "PMC Station",
+    "110": "Advanced Factory",
+    "111": "Laboratory",
+    "112": "Agristation",
+    "113": "Warp Beacon",
+    "114": "Jumpgate",
+    "115": "Sensor Relay",
+    "116": "Solar Array",
+    "117": "Defense Wall",
+    "118": "Sniper Turret",
+    "12": "PMC Turret",
+    "13": "PMC Station",
+    "14": "PMC Mining Station",
+    "20": "Syndicate Outpost",
+    "21": "Syndicate Station",
+    "22": "Syndicate Turret",
+    "30": "Red Skull Outpost",
+    "31": "Red Skull Station",
+    "32": "Red Skull Turret",
+    "40": "Venghi Outpost",
+    "41": "Venghi Base",
+    "42": "Venghi Turret",
+    "43": "Power Plant",
+    "44": "Venghi Turret",
+    "50": "CoT Outpost",
+    "51": "CoT Base",
+    "52": "CoT Turret",
+    "53": "CoT Heavy Turret",
+    "60": "Tinhead Workshop",
+    "70": "Factory",
+    "71": "Laboratory",
+    "72": "Agristation",
+    "73": "Mining Station",
+    "74": "Advanced Mining Station",
+    "80": "Jumpgate",
+    "85": "Asteroid Station",
+    "86": "Asteroid Station 2",
+    "87": "Cantina 1"
+  },
+  "resale_skill_mod": 0.009999999776482582,
+  "purchase_skill_mod": 0.019999999552965164
+}
