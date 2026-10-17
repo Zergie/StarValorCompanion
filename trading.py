@@ -15,6 +15,21 @@ from telemetry import Connection, STATE_DIR
 FACTIONS=['Independent','PMC','Syndicate','Red Skull','Venghi','Children of Terra','Technomancers']
 
 
+def station_accessible(mono,station,reputation):
+    if station['ownerID']!=0 or station['state']!=0 or station['buildingState']!=0:return False
+    faction=station['factionIndex']
+    if faction>0 and (faction>=len(reputation) or reputation[faction]<=-1000):return False
+    dock=station.get('dockingControl')
+    if dock:
+        for aisc in mono.selected(dock,['aisc','aISC','stationControl']).values():
+            if not aisc:continue
+            ss=mono.selected(aisc,['ss']).get('ss')
+            if not ss:continue
+            ff=mono.selected(ss,['ffSys']).get('ffSys')
+            if ff and mono.get(ff,'hostileToPlayer'):return False
+    return True
+
+
 def market_price(item,mode,stock,sector_price=None):
     if mode==0:
         return sector_price if sector_price is not None and sector_price>0 else None
@@ -137,20 +152,7 @@ class TradeReader:
             if not mono.get(obj,'discovered'):continue
             st=mono.selected(obj,['id','ownerID','state','buildingState','sectorIndex','factionIndex','buildingPlanID','level','x','y','modules','itemStock','dockingControl'])
             faction=st['factionIndex']
-            if st['ownerID']!=0 or st['state']!=0 or st['buildingState']!=0:continue
-            if faction>0 and (faction>=len(reps) or reps[faction]<=-1000):continue
-            # Loaded stations can be locally hostile even with neutral faction reputation.
-            dock=st.get('dockingControl')
-            if dock:
-                control=mono.selected(dock,['aisc','aISC','stationControl'])
-                for aisc in control.values():
-                    if not aisc:continue
-                    fields=mono.selected(aisc,['ss'])
-                    if fields.get('ss'):
-                        ff=mono.selected(fields['ss'],['ffSys']).get('ffSys')
-                        if ff and mono.get(ff,'hostileToPlayer'):break
-                else:aisc=None
-                if aisc:continue
+            if not station_accessible(mono,st,reps):continue
             markets=[]
             for mod in mono.list(st['modules']):
                 if mono.class_name(mono.object_class(mod))=='SM_Market':

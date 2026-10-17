@@ -52,6 +52,19 @@ class CliTests(unittest.TestCase):
         self.invoke('preferences','--no-allow-discard')
         self.assertFalse(self.invoke('preferences')[1]['data']['allow_discard'])
 
+    def test_fleet_preference_and_temporary_override(self):
+        data=example()
+        data['inventory'][0].update(active_loaded=2,fleet_loaded=8)
+        data['inventory'][1].update(active_loaded=0,fleet_loaded=5)
+        source=self.snapshot(data)
+        self.invoke('preferences','--no-include-fleet')
+        result=self.invoke('sell','--input',source)[1]['data']
+        self.assertFalse(result['include_fleet'])
+        self.assertEqual(result['plans'][0]['proceeds'],3300)
+        result=self.invoke('sell','--input',source,'--include-fleet')[1]['data']
+        self.assertEqual(result['plans'][0]['proceeds'],3100)
+        self.assertFalse(self.invoke('preferences')[1]['data']['include_fleet'])
+
     def test_inventory_keeps_absent_exclusion_and_resource_stash(self):
         self.invoke('exclude','add','3:99:1','--name','Keep this')
         data=self.invoke('inventory','--input',self.snapshot(example()))[1]['data']

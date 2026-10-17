@@ -7,6 +7,8 @@ from buying import filter_offers
 
 
 class BuyingPage(ttk.Frame):
+    QUALITY_COLORS={'Grey':'#93a6b8','White':'#e5edf5','Green':'#79d69a',
+                    'Blue':'#76b8ff','Purple':'#c79dff','Orange':'#ffbd72'}
     COLUMNS=[('name','Item',230),('category','Type',85),('quality','Quality',80),
              ('quantity','Qty',75),('price','Unit price cr',110),('station','Station',250),('distance','Distance pc',100)]
 
@@ -34,6 +36,8 @@ class BuyingPage(ttk.Frame):
         frame=ttk.Frame(self);frame.pack(fill='both',expand=True)
         frame.rowconfigure(0,weight=1);frame.columnconfigure(0,weight=1)
         self.tree=ttk.Treeview(frame,columns=[c[0] for c in self.COLUMNS],show='headings',selectmode='browse')
+        for quality,color in self.QUALITY_COLORS.items():
+            self.tree.tag_configure(quality,foreground=color)
         for key,title,width in self.COLUMNS:
             self.tree.heading(key,text=title,command=lambda k=key:self.sort(k))
             self.tree.column(key,width=width,minwidth=110 if key in ('name','station') else width,stretch=key in ('name','station'),anchor='e' if key in ('quantity','price','distance') else 'w')
@@ -64,7 +68,7 @@ class BuyingPage(ttk.Frame):
             self.tree.insert('','end',iid=str(index),values=(row['name'],row['category'],row['quality'],
                 'Unlimited' if row['quantity'] is None else f"{row['quantity']:,}",
                 'Unknown' if row['price'] is None else f"{row['price']:,.2f}",
-                f"{row['station']} [{row['level']}] ({row['coordinates'][0]}, {row['coordinates'][1]})",f"{row['distance']:.1f}"))
+                f"{row['station']} [{row['level']}] ({row['coordinates'][0]}, {row['coordinates'][1]})",f"{row['distance']:.1f}"),tags=(row['quality'],))
         when=datetime.fromisoformat(self.data['read_at']).astimezone().strftime('%H:%M:%S')
         unknown=sum(r['price'] is None for r in self.shown)
         self.status.set(f"Snapshot {when} · {len(self.shown):,} of {len(self.data['purchase_offers']):,} listings · {self.data['stations']} stations · {unknown} unknown prices")

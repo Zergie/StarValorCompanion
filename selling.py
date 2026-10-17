@@ -19,9 +19,28 @@ def load_allow_discard(path):
 
 
 def save_allow_discard(path,enabled):
+    save_sale_setting(path,'allow_discard',enabled)
+
+
+def load_include_fleet(path):
+    try:
+        settings=json.loads(Path(path).read_text(encoding='utf-8'))
+        return not (isinstance(settings,dict) and settings.get('include_fleet') is False)
+    except (OSError,ValueError):return True
+
+
+def save_include_fleet(path,enabled):
+    save_sale_setting(path,'include_fleet',enabled)
+
+
+def save_sale_setting(path,key,enabled):
     path=Path(path);path.parent.mkdir(parents=True,exist_ok=True)
+    try:settings=json.loads(path.read_text(encoding='utf-8'))
+    except (OSError,ValueError):settings={}
+    if not isinstance(settings,dict):settings={}
+    settings[key]=bool(enabled)
     temporary=path.with_suffix('.tmp')
-    temporary.write_text(json.dumps({'allow_discard':bool(enabled)},indent=2),encoding='utf-8')
+    temporary.write_text(json.dumps(settings,indent=2),encoding='utf-8')
     temporary.replace(path)
 
 
@@ -72,16 +91,30 @@ def inventory_rows(inventory,excluded):
     return sorted(rows.values(),key=lambda r:(not r['excluded'],r['name'].lower()))
 
 
-def calculate_sales(data,excluded,allow_discard=False):
+def sale_inventory(inventory,include_fleet=True):
+    """Project a snapshot onto the selected holds without modifying the snapshot."""
+    if include_fleet:return inventory
+    rows=[]
+    for item in inventory:
+        active=item.get('active_loaded',item['loaded']-item.get('fleet_loaded',0))
+        if active+item['stash']<=0:continue
+        row=dict(item,loaded=active,active_loaded=active,fleet_loaded=0)
+        if 'sources' in row:
+            row['sources']=[s for s in row['sources'] if s.get('active') or s.get('storage')=='stash']
+        rows.append(row)
+    return rows
+
+
+def calculate_sales(data,excluded,allow_discard=False,include_fleet=True):
     """Maximize total proceeds at a single station, with explicit zero-value discards."""
-    items=[i for i in data['inventory'] if i.get('item_type')!=5 and not i['key'].startswith('5:')
+    items=[i for i in sale_inventory(data['inventory'],include_fleet) if i.get('item_type')!=5 and not i['key'].startswith('5:')
            and i['key'] not in excluded and i['loaded']+i['stash']>0]
     if not items:return []
     plans=[]
     for station in data['sale_stations']:
         lines=[];total=0;discarded=0;unknown=0;sold=0
         for item in items:
-            quote=data['quotes'][str(station['station_id'])].get(item['key'],dict(status='unknown',price=None))
+            quote=(data['quotes'] if include_fleet else data.get('active_quotes',data['quotes']))[str(station['station_id'])].get(item['key'],dict(status='unknown',price=None))
             quantity=item['loaded']+item['stash'];status=quote['status'];price=quote.get('price')
             if status=='sell':
                 value=quantity*price;total+=value;sold+=quantity
@@ -208,7 +241,7 @@ class SaleReader(TradeReader):
                 return base
             return None
 
-        inventory={};records={}
+        inventory={};records={};active_records={}
         fleet=FleetCargoSnapshot(m,gd['character'],m.get(ship,'shipData'),catalog)
         for ci,source in fleet.entries:
             typ=ci['itemType'];item=ci['itemID'];rarity=ci['rarity']
@@ -226,7 +259,7 @@ class SaleReader(TradeReader):
                 else:name=f'Crew / item type {typ} #{item}'
                 if typ in (1,2):name+=f' ({QUALITIES[rarity] if 0<=rarity<6 else rarity})'
                 inventory[key]=dict(key=key,name=name,loaded=0,active_loaded=0,fleet_loaded=0,stash=0,sources=[],item_type=typ,item_id=item,rarity=rarity)
-                records[key]=[]
+                records[key]=[];active_records[key]=[]
             inventory[key]['loaded' if location==-1 else 'stash']+=ci['qnt']
             if location==-1:inventory[key]['active_loaded' if source['active'] else 'fleet_loaded']+=ci['qnt']
             storage='cargo' if location==-1 else 'stash'
@@ -234,28 +267,32 @@ class SaleReader(TradeReader):
             if origin:origin['quantity']+=ci['qnt']
             else:inventory[key]['sources'].append(dict(source,storage=storage,quantity=ci['qnt']))
             records[key].append(ci)
-        sale_quotes={}
-        for station in data['sale_stations']:
-            sid=station['station_id'];out={};sale_quotes[str(sid)]=out
-            for key,item in inventory.items():
-                typ=item['item_type'];cis=records[key];status='sell';value=0;quantity=0
-                if typ==3:
-                    q=quotes[sid].get((item['item_id'],item['rarity'],False))
-                    if any(ci.get('extraData') for ci in cis):status='unknown'
-                    elif not q or q['mode']>0:status='reject'
-                    elif q['price'] is None:status='unknown'
-                    elif q['price']<0:status='reject'
-                elif typ not in (1,2,4):status='unknown'
-                if status=='sell':
-                    for ci in cis:
-                        price=raw_price(ci,sid)
-                        if price is None:status='unknown';break
-                        if typ!=3:price=resale_price(price,typ,skill,trade)
-                        if price is None or not math.isfinite(price):status='unknown';break
-                        value+=price*ci['qnt'];quantity+=ci['qnt']
-                out[key]=dict(status=status,price=value/quantity if quantity and status=='sell' else None)
+            if source['active']:active_records[key].append(ci)
+        scoped_quotes=[]
+        for scoped_records in (records,active_records):
+            sale_quotes={}
+            for station in data['sale_stations']:
+                sid=station['station_id'];out={};sale_quotes[str(sid)]=out
+                for key,item in inventory.items():
+                    typ=item['item_type'];cis=scoped_records[key];status='sell';value=0;quantity=0
+                    if typ==3:
+                        q=quotes[sid].get((item['item_id'],item['rarity'],False))
+                        if any(ci.get('extraData') for ci in cis):status='unknown'
+                        elif not q or q['mode']>0:status='reject'
+                        elif q['price'] is None:status='unknown'
+                        elif q['price']<0:status='reject'
+                    elif typ not in (1,2,4):status='unknown'
+                    if status=='sell':
+                        for ci in cis:
+                            price=raw_price(ci,sid)
+                            if price is None:status='unknown';break
+                            if typ!=3:price=resale_price(price,typ,skill,trade)
+                            if price is None or not math.isfinite(price):status='unknown';break
+                            value+=price*ci['qnt'];quantity+=ci['qnt']
+                    out[key]=dict(status=status,price=value/quantity if quantity and status=='sell' else None)
+            scoped_quotes.append(sale_quotes)
         if m.player(c.root)!=(pc,ship) or m.get(game,'currentSectorIndex')!=sector_index:
             raise MemoryUnavailable('Cargo changed during the read; refresh the sale plan.')
         fleet.validate()
-        data.update(inventory=list(inventory.values()),quotes=sale_quotes,fleet_ships=fleet.sources)
+        data.update(inventory=list(inventory.values()),quotes=scoped_quotes[0],active_quotes=scoped_quotes[1],fleet_ships=fleet.sources)
         return data

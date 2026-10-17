@@ -51,6 +51,8 @@ refresh only when you click their refresh buttons.
 | **Trading** | What to buy, how much, where to sell, estimated profit, and route distance. |
 | **Sell cargo** | Single-station sale plans for all fleet cargo and the shared resource stash. |
 | **Buy items** | Searchable purchase offers for goods, equipment, weapons, and ships. |
+| **Personnel** | Available academy recruits, skills, hiring cost, requirements, station and distance. |
+| **Exploration** | Faction territory map, known-sector checklist, and progress bars for visited, fully explored and fog cleared. |
 | **Memory map** | Field offsets, current addresses, types, and values. |
 
 **Pause** stops periodic reads. **Reconnect** forces fresh discovery.
@@ -156,6 +158,47 @@ change before arrival.
 
 </details>
 
+### Find personnel to hire
+
+Open **Personnel** and click **Refresh personnel**. Search crew names, skills
+(such as Engineer or Pilot), quality, stations or factions. Click the name,
+level, hiring cost, requirement or distance heading to sort. Select a recruit
+for the full name, skill ranks and bonus-level counts. Refresh is manual.
+
+The page reads recruitment IDs from discovered, non-hostile NPC academies,
+including stations without an item market. It does not generate missing
+recruits or perform hiring. Ungenerated rosters are counted; unresolved crew
+records retain an Unknown quote. Hiring cost includes the recruitment skill
+discount. The requirement is minimum Space Pilot OR Fleet Commander; credit,
+berth and docking restrictions still apply. Prices are current estimates.
+
+### Track exploration
+
+Open **Exploration** and click **Refresh exploration** for three distinct progress
+bars: visited sectors, fully explored sectors, and fog cleared across measured
+visited sectors. Known, unvisited and unfinished counts remain in the summary
+line instead of complementary progress bars.
+Counts and percentages use all sectors currently recorded in the save, rather
+than an assumed fixed galaxy size. The status line also reports uncharted sectors
+and visited sectors whose fog data is unknown.
+
+The territory map colours each known sector by the game's current faction
+control, including Independent and Unclaimed, with a colour/count legend.
+White borders mark fully explored sectors; a white ring marks your current
+sector. Drag to pan, use the mouse wheel or +/− to zoom, and click Fit to see
+all known sectors. Click a cell to select its row, or select a row to highlight
+the cell. Each cell represents one sector; the map does not infer borders across
+unknown space. Search also matches faction names. Old snapshots without faction
+data use dark-grey Unknown ownership.
+
+Visited means the game's `discovered` flag. Fully explored means visited and
+generated, with an existing fog list containing zero remaining tiles. Percent
+explored uses the game's `(fowXtiles + 1) * (fowYtiles + 1)` total. Missing or
+inconsistent fog data stays Unknown. The fog bar is weighted by tile count and
+excludes unknown measurements. Known-sector rows can be searched and filtered by
+visited/completed state, with exploration percentage and distance. Uncharted
+names and coordinates are hidden. Refresh is manual and read-only.
+
 ## Reading model
 
 The app requests only `PROCESS_QUERY_INFORMATION | PROCESS_VM_READ`. It does not
@@ -257,6 +300,8 @@ packages are required. The CLI shares the GUI's readers and calculations.
 | `inventory` | All fleet cargo, resource stash, item sources, keys and saved exclusions. |
 | `sell` | Single-station sale plans, including SELL, DISCARD and REVIEW entries. |
 | `buy` | Purchase listings; search and sort by price, quantity, distance, item or station. |
+| `personnel` | Academy recruits; search and sort by cost, distance, level, requirement or name. |
+| `exploration` | Exploration totals and sector progress; supports `--state incomplete` and `--search`. |
 | `exclude list/add/remove` | Manage persistent item exclusions by `TYPE:ID:QUALITY`. |
 | `preferences` | Read or change the persistent discard checkbox. |
 | `catalog` | Search static item data without the game running. |

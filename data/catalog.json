@@ -2797,5 +2797,6 @@
     "87": "Cantina 1"
   },
   "resale_skill_mod": 0.009999999776482582,
-  "purchase_skill_mod": 0.019999999552965164
+  "purchase_skill_mod": 0.019999999552965164,
+  "recruitment_skill_mod": 0.10000000149011612
 }

@@ -6,7 +6,8 @@ from pathlib import Path
 from unittest.mock import patch
 
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
-from selling import Exclusions, SaleReader, FleetCargoSnapshot, calculate_sales, inventory_rows, resale_price, weapon_price
+from selling import (Exclusions, SaleReader, FleetCargoSnapshot, calculate_sales, inventory_rows, resale_price, weapon_price,
+                     load_include_fleet, save_include_fleet, load_allow_discard, save_allow_discard)
 from reader import MemoryUnavailable
 
 
@@ -21,6 +22,34 @@ def example():
 
 
 class SellingTests(unittest.TestCase):
+    def test_ship_only_keeps_stash_removes_fleet_only_rejections_and_uses_own_quotes(self):
+        data=example()
+        data['inventory'][0].update(active_loaded=2,fleet_loaded=8,sources=[
+            dict(active=True,storage='cargo',quantity=2),dict(active=False,storage='cargo',quantity=8)])
+        data['inventory'][1].update(active_loaded=0,fleet_loaded=5)
+        data['active_quotes']=copy.deepcopy(data['quotes'])
+        data['active_quotes']['2']['3:1:1']['price']=200
+        before=copy.deepcopy(data)
+        plan=calculate_sales(data,{},include_fleet=False)[0]
+        self.assertEqual(plan['station']['station_id'],2)
+        self.assertEqual(plan['proceeds'],4400)
+        self.assertEqual(plan['sold'],22)
+        self.assertEqual(plan['lines'][0]['fleet_loaded'],0)
+        self.assertTrue(all(s['active'] for s in plan['lines'][0]['sources']))
+        self.assertEqual(data,before)
+        self.assertEqual(calculate_sales(data,{})[0]['proceeds'],3100)
+
+    def test_fleet_setting_survives_discard_setting_changes(self):
+        with tempfile.TemporaryDirectory(dir=Path(__file__).resolve().parents[1]/'.local') as folder:
+            path=Path(folder)/'settings.json'
+            self.assertTrue(load_include_fleet(path))
+            save_include_fleet(path,False)
+            save_allow_discard(path,True)
+            self.assertFalse(load_include_fleet(path))
+            self.assertTrue(load_allow_discard(path))
+            save_include_fleet(path,True)
+            self.assertTrue(load_allow_discard(path))
+
     def test_stash_and_cargo_combined_at_one_station(self):
         plans=calculate_sales(example(),{},False)
         self.assertEqual(len(plans),1)

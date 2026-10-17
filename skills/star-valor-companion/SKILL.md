@@ -19,6 +19,8 @@ python C:\GIT\StarValorCompanion\cli.py inventory
 python C:\GIT\StarValorCompanion\cli.py trades --min-profit 1000 --limit 10
 python C:\GIT\StarValorCompanion\cli.py sell --limit 5
 python C:\GIT\StarValorCompanion\cli.py buy --search "mining drone" --sort price
+python C:\GIT\StarValorCompanion\cli.py personnel --search engineer --sort price
+python C:\GIT\StarValorCompanion\cli.py exploration --state incomplete
 python C:\GIT\StarValorCompanion\cli.py catalog --category equipment --search drone
 ```
 
@@ -26,8 +28,12 @@ python C:\GIT\StarValorCompanion\cli.py catalog --category equipment --search dr
 - `inventory` includes every living ship in the player's fleet roster, including docked/hangar/remote ships. Rows expose `active_loaded`, `fleet_loaded`, combined `loaded`, `stash`, and per-ship `sources`; the shared stash is counted once. Stable keys and saved exclusions apply across the fleet, including absent items. Crew and station storage are ignored. Sale plans assume fleet cargo is brought to the chosen station; retrieval costs and fleet docking restrictions are not calculated.
 - `trades` ranks current → buy → sell by straight-line sector distance, local travel, then profit; it does not maximize profit first. At most 5,000 candidates are retained. `--limit 0` returns all retained matches.
 - `sell` ranks single-station plans by total proceeds, then distance. Complete quotes precede incomplete quotes. SELL lines are ordered by total value descending; rejected goods and unknown quotes remain distinct.
+- Sell cargo has a saved **Include fleet cargo** checkbox (default on). Off includes only the active ship and shared resource stash. CLI `sell --no-include-fleet` / `--include-fleet` override that setting temporarily; `preferences --no-include-fleet` / `--include-fleet` persist it. Item exclusions remain saved across scope changes. No memory refresh is triggered by toggling.
 - `buy` includes goods, equipment, weapons and ships. Search also matches quality, station, faction and sector. Quantity is station stock, not affordable/loadable quantity; `null` quantity means unlimited, `null` price means unknown. Sort by distance, price or quantity, optionally `--descending`.
 - `catalog` works without the game and returns static data. Catalog prices are base prices, not live station quotes.
+- `exploration` returns sector progress and totals, with `--state all|visited|incomplete|complete|unvisited`, `--search`, and raw/offline export support. Visited uses the discovered flag; fully explored requires visited/generated with zero remaining fog tiles. Unknown fog is never counted complete. Fog percentage is tile-weighted across measured visited sectors. Totals cover sectors recorded in the save, not a fixed galaxy size. Uncharted names/coordinates are hidden; filtering affects rows, not totals. Use `gui --tab Exploration` for progress bars.
+- Exploration rows include `faction_id` and `faction` from current sector control (`-1` Unclaimed, `0` Independent, `1` PMC, `2` Syndicate, `3` Red Skull, `4` Venghi, `5` Children of Terra, `6` Technomancers). Missing ownership stays Unknown. Search matches factions. The GUI has a faction-coloured known-sector map with pan/zoom and three bars (visited, fully explored, fog cleared); it does not infer territory across uncharted space.
+- `personnel` reads academy recruitment lists, including academies without markets. It returns names, quality, skill ranks (0 apprentice to 5 legendary), hiring cost including recruitment discount, pilot/fleet requirement, station and distance. It supports search, numeric sorting, `--raw`, `--input`, and `--limit`. Requirements mean Space Pilot OR Fleet Commander; berth/credit/docking restrictions still apply. Ungenerated rosters cannot be previewed, and unresolved crew IDs retain Unknown quotes. The CLI never generates or hires personnel. Use `gui --tab Personnel` for the new page.
 
 ## Preferences and exclusions
 

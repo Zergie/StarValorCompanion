@@ -9,12 +9,14 @@ import sys
 import threading
 
 from buying import BuyReader, filter_offers
+from personnel import PersonnelReader,filter_personnel
+from exploration import ExplorationReader,filter_sectors
 from reader import Cancelled, MemoryUnavailable
-from selling import Exclusions, SaleReader, calculate_sales, inventory_rows, load_allow_discard, save_allow_discard
+from selling import Exclusions, SaleReader, calculate_sales, inventory_rows, load_allow_discard, save_allow_discard, load_include_fleet, save_include_fleet
 from telemetry import APP_DIR, STATE_DIR, Catalog, Connection
 from trading import TradeReader
 
-TABS=['Overview','Equipment','Ship modifications','Trading','Sell cargo','Buy items','Memory map']
+TABS=['Overview','Equipment','Ship modifications','Trading','Sell cargo','Buy items','Personnel','Exploration','Memory map']
 
 
 def nonnegative(value):
@@ -56,6 +58,7 @@ def parser():
     trades.add_argument('--search',default='')
     trades.add_argument('--limit',type=int,default=100,help='Maximum results; 0 for all retained routes.')
     sell=commands.add_parser('sell',parents=[live],help='Best single-station sale plans, including discard/review lines.')
+    sell.add_argument('--include-fleet',action=argparse.BooleanOptionalAction,default=None)
     sell.add_argument('--allow-discard',action=argparse.BooleanOptionalAction,default=None,help='Override saved preference for this invocation only.')
     sell.add_argument('--exclude',type=item_key,action='append',default=[],help='Temporarily exclude an item key; repeatable.')
     sell.add_argument('--include',type=item_key,action='append',default=[],help='Temporarily include a saved exclusion; repeatable.')
@@ -65,11 +68,20 @@ def parser():
     buy.add_argument('--sort',choices=['distance','price','quantity','name','station','category','quality'],default='distance')
     buy.add_argument('--descending',action='store_true')
     buy.add_argument('--limit',type=int,default=0)
+    personnel=commands.add_parser('personnel',parents=[live],help='Available academy recruits, skills and hiring costs.')
+    personnel.add_argument('--search',default='')
+    personnel.add_argument('--sort',choices=['distance','price','name','level','requirement'],default='distance')
+    personnel.add_argument('--descending',action='store_true')
+    personnel.add_argument('--limit',type=int,default=0)
+    exploration=commands.add_parser('exploration',parents=[live],help='Galaxy exploration totals and known-sector progress.')
+    exploration.add_argument('--search',default='')
+    exploration.add_argument('--state',choices=['all','visited','incomplete','complete','unvisited'],default='all')
     exclude=commands.add_parser('exclude',parents=[common],help='List/add/remove persistent Sell cargo item exclusions.')
     exclude.add_argument('action',choices=['list','add','remove'],nargs='?',default='list')
     exclude.add_argument('key',type=item_key,nargs='?')
     exclude.add_argument('--name',help='Display name for an added exclusion (optional).')
     settings=commands.add_parser('preferences',parents=[common],help='Read or change the saved discard checkbox.')
+    settings.add_argument('--include-fleet',action=argparse.BooleanOptionalAction,default=None)
     settings.add_argument('--allow-discard',action=argparse.BooleanOptionalAction,default=None)
     catalog=commands.add_parser('catalog',parents=[common],help='Search the installed item/name catalog without the game.')
     catalog.add_argument('--category',choices=['goods','equipment','ships','modifications','stations','all'],default='all')
@@ -102,7 +114,7 @@ def read_snapshot(args):
         if args.fresh:connection.connect(fresh=True)
         if args.command=='ship':data=connection.read()
         else:
-            reader=BuyReader if args.command=='buy' else SaleReader if args.command in ('sell','inventory') else TradeReader
+            reader={'personnel':PersonnelReader,'exploration':ExplorationReader,'buy':BuyReader,'sell':SaleReader,'inventory':SaleReader,'trades':TradeReader}[args.command]
             data=reader(connection).read()
         if stop.is_set():raise Cancelled('Read timed out.')
         return data
@@ -124,7 +136,8 @@ def execute(args):
     exclusions=Exclusions(STATE_DIR/'sale-exclusions.json')
     if args.command=='preferences':
         if args.allow_discard is not None:save_allow_discard(settings_path,args.allow_discard)
-        return dict(allow_discard=load_allow_discard(settings_path))
+        if args.include_fleet is not None:save_include_fleet(settings_path,args.include_fleet)
+        return dict(allow_discard=load_allow_discard(settings_path),include_fleet=load_include_fleet(settings_path))
     if args.command=='exclude':
         if args.action!='list' and args.key is None:raise ValueError('An item key is required for add/remove. Use inventory to find keys.')
         if args.action=='add' and args.key not in exclusions.items:
@@ -163,6 +176,13 @@ def execute(args):
         require(data,'purchase_offers')
         rows=filter_offers(data['purchase_offers'],args.search,args.sort,args.descending)
         result.update(items=rows[:args.limit] if args.limit else rows,total=len(rows))
+    elif args.command=='personnel':
+        require(data,'personnel')
+        rows=filter_personnel(data['personnel'],args.search,args.sort,args.descending)
+        result.update(personnel=rows[:args.limit] if args.limit else rows,total=len(rows),academies=data.get('academies',0),unloaded_academies=data.get('unloaded_academies',0))
+    elif args.command=='exploration':
+        require(data,'summary','sectors')
+        result.update(summary=data['summary'],sectors=filter_sectors(data['sectors'],args.search,args.state))
     elif args.command=='trades':
         if 'routes' not in data and isinstance(data.get('trading'),dict):data=data['trading'];result=metadata(data)
         require(data,'routes')
@@ -174,10 +194,11 @@ def execute(args):
         for key in args.include:excluded.pop(key,None)
         for key in args.exclude:excluded[key]='Temporary exclusion'
         discard=load_allow_discard(settings_path) if args.allow_discard is None else args.allow_discard
-        plans=calculate_sales(data,excluded,discard)
+        include_fleet=load_include_fleet(settings_path) if args.include_fleet is None else args.include_fleet
+        plans=calculate_sales(data,excluded,discard,include_fleet)
         for plan in plans:
             plan['lines']=sorted(plan['lines'],key=lambda i:(i['status']!='sell',-i['value'] if i['status']=='sell' else 0))
-        result.update(plans=plans[:args.limit] if args.limit else plans,total=len(plans),exclusions=excluded,allow_discard=discard)
+        result.update(plans=plans[:args.limit] if args.limit else plans,total=len(plans),exclusions=excluded,allow_discard=discard,include_fleet=include_fleet)
     return result
 
 

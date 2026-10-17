@@ -21,6 +21,10 @@ from selling import SaleReader
 from selling_ui import SellingPage
 from buying import BuyReader
 from buying_ui import BuyingPage
+from personnel import PersonnelReader
+from personnel_ui import PersonnelPage
+from exploration import ExplorationReader
+from exploration_ui import ExplorationPage
 import window_state
 
 BG='#10171f'; PANEL='#19232e'; TEXT='#e5edf5'; MUTED='#93a6b8'; ACCENT='#4ed8b1'
@@ -78,7 +82,7 @@ class Companion(tk.Tk):
         self.title('Star Valor Companion'); self.geometry('1140x840'); self.minsize(960,740)
         self.configure(bg=BG)
         self.events=queue.Queue(); self.latest=None; self.worker=None; self.trade_worker=None;self.trade_data=None;self._closed=False
-        self.sale_worker=None;self.buy_worker=None
+        self.sale_worker=None;self.buy_worker=None;self.personnel_worker=None;self.exploration_worker=None
         self._window_path=STATE_DIR/'window.json'
         self._equipment_signature=None; self._mod_signature=None
         self.variables={}; self.metrics={}; self.progress_bars={}
@@ -92,6 +96,8 @@ class Companion(tk.Tk):
             self.trade_worker=TradeWorker(self.events);self.trade_worker.start()
             self.sale_worker=TradeWorker(self.events,SaleReader,'sales','sale_status');self.sale_worker.start()
             self.buy_worker=TradeWorker(self.events,BuyReader,'purchases','buy_status');self.buy_worker.start()
+            self.personnel_worker=TradeWorker(self.events,PersonnelReader,'personnel','personnel_status');self.personnel_worker.start()
+            self.exploration_worker=TradeWorker(self.events,ExplorationReader,'exploration','exploration_status');self.exploration_worker.start()
         self._poll_after=self.after(100,self.poll)
     def _style(self):
         style=ttk.Style(self); style.theme_use('clam')
@@ -145,6 +151,8 @@ class Companion(tk.Tk):
         trades=ttk.Frame(tabs,padding=(0,18));tabs.add(trades,text='Trading');self.trade_tab=trades
         self.selling_page=SellingPage(tabs,self.request_sales,STATE_DIR/'sale-exclusions.json');tabs.add(self.selling_page,text='Sell cargo')
         self.buying_page=BuyingPage(tabs,self.request_purchases);tabs.add(self.buying_page,text='Buy items')
+        self.personnel_page=PersonnelPage(tabs,self.request_personnel);tabs.add(self.personnel_page,text='Personnel')
+        self.exploration_page=ExplorationPage(tabs,self.request_exploration);tabs.add(self.exploration_page,text='Exploration')
         memory=ttk.Frame(tabs,padding=(0,18)); tabs.add(memory,text='Memory map')
         self._overview(overview); self._equipment(equipment); self._mods(mods);self._trading(trades);self._memory(memory)
         footer=ttk.Frame(shell); footer.pack(fill='x',pady=(12,0))
@@ -239,6 +247,18 @@ class Companion(tk.Tk):
             self.buying_page.status.set('Paused — resume live reads to refresh purchase listings.');return
         self.buy_worker.request.set()
         self.buying_page.status.set('Reading station purchase listings, stock and prices…')
+    def request_personnel(self):
+        if not self.personnel_worker:return
+        if self.worker and self.worker.pause_event.is_set():
+            self.personnel_page.status.set('Paused — resume live reads to refresh personnel.');return
+        self.personnel_worker.request.set()
+        self.personnel_page.status.set('Reading academy recruitment listings…')
+    def request_exploration(self):
+        if not self.exploration_worker:return
+        if self.worker and self.worker.pause_event.is_set():
+            self.exploration_page.status.set('Paused — resume live reads to refresh exploration.');return
+        self.exploration_worker.request.set()
+        self.exploration_page.status.set('Reading sector flags and fog-of-war progress…')
     @staticmethod
     def station_label(station):
         x,y=station['coordinates'];return f"{station['station']} [{station['level']}] · ({x}, {y})"
@@ -334,6 +354,10 @@ class Companion(tk.Tk):
             elif event[0]=='sale_status':self.selling_page.status.set(event[1])
             elif event[0]=='purchases':self.buying_page.set_data(event[1])
             elif event[0]=='buy_status':self.buying_page.status.set(event[1])
+            elif event[0]=='personnel':self.personnel_page.set_data(event[1])
+            elif event[0]=='personnel_status':self.personnel_page.status.set(event[1])
+            elif event[0]=='exploration':self.exploration_page.set_data(event[1])
+            elif event[0]=='exploration_status':self.exploration_page.status.set(event[1])
         self._poll_after=self.after(100,self.poll)
     def pause(self):
         if not self.worker: return
@@ -352,6 +376,12 @@ class Companion(tk.Tk):
         if self.buy_worker:
             if self.worker.pause_event.is_set():self.buy_worker.paused.set()
             else:self.buy_worker.paused.clear()
+        if self.personnel_worker:
+            if self.worker.pause_event.is_set():self.personnel_worker.paused.set()
+            else:self.personnel_worker.paused.clear()
+        if self.exploration_worker:
+            if self.worker.pause_event.is_set():self.exploration_worker.paused.set()
+            else:self.exploration_worker.paused.clear()
     def reconnect(self):
         if self.worker:
             self.worker.pause_event.clear(); self.pause_button.configure(text='Pause')
@@ -361,6 +391,8 @@ class Companion(tk.Tk):
             if self.trade_worker:self.trade_worker.paused.clear()
             if self.sale_worker:self.sale_worker.paused.clear()
             if self.buy_worker:self.buy_worker.paused.clear()
+            if self.personnel_worker:self.personnel_worker.paused.clear()
+            if self.exploration_worker:self.exploration_worker.paused.clear()
     def export(self):
         if not self.latest: return
         path=filedialog.asksaveasfilename(parent=self,title='Export ship snapshot',defaultextension='.json',
@@ -378,6 +410,8 @@ class Companion(tk.Tk):
         if self.trade_worker:self.trade_worker.shutdown()
         if self.sale_worker:self.sale_worker.shutdown()
         if self.buy_worker:self.buy_worker.shutdown()
+        if self.personnel_worker:self.personnel_worker.shutdown()
+        if self.exploration_worker:self.exploration_worker.shutdown()
         self.destroy()
 
 
@@ -392,7 +426,7 @@ def main():
     parser.add_argument('--probe',action='store_true',help='Read one live snapshot to JSON, then exit')
     parser.add_argument('--fresh',action='store_true',help='Ignore the connection cache and rediscover Mono metadata')
     parser.add_argument('--output',type=Path,help='JSON path for --probe')
-    parser.add_argument('--tab',default='Overview',choices=['Overview','Equipment','Ship modifications','Trading','Sell cargo','Buy items','Memory map'],help='Initially selected tab')
+    parser.add_argument('--tab',default='Overview',choices=['Overview','Equipment','Ship modifications','Trading','Sell cargo','Buy items','Personnel','Exploration','Memory map'],help='Initially selected tab')
     parser.add_argument('--paused',action='store_true',help='Start with live reads paused')
     parser.add_argument('--keep-on-top',action='store_true',help='Keep the window above other windows')
     args=parser.parse_args(); setup_logging()
@@ -415,6 +449,8 @@ def main():
             if app.trade_worker:app.trade_worker.shutdown();app.trade_worker.join(timeout=2)
             if app.sale_worker:app.sale_worker.shutdown();app.sale_worker.join(timeout=2)
             if app.buy_worker:app.buy_worker.shutdown();app.buy_worker.join(timeout=2)
+            if app.personnel_worker:app.personnel_worker.shutdown();app.personnel_worker.join(timeout=2)
+            if app.exploration_worker:app.exploration_worker.shutdown();app.exploration_worker.join(timeout=2)
 
 
 if __name__=='__main__': main()
