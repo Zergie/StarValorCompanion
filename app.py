@@ -2,9 +2,11 @@
 from __future__ import annotations
 
 import argparse
+import ctypes
 from datetime import datetime
 import json
 import logging
+import os
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
 import queue
@@ -78,7 +80,13 @@ class Worker(threading.Thread):
 
 class Companion(tk.Tk):
     def __init__(self,start_worker=True,start_paused=False):
+        try:ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID('StarValorCompanion.Desktop')
+        except OSError:logging.exception('Could not set the Windows application identity')
         super().__init__()
+        icon=APP_DIR/'assets'/'app-icon.ico'
+        if icon.exists():
+            self.iconbitmap(str(icon))
+            self.iconbitmap(default=str(icon))
         self.title('Star Valor Companion'); self.geometry('1140x840'); self.minsize(960,740)
         self.configure(bg=BG)
         self.events=queue.Queue(); self.latest=None; self.worker=None; self.trade_worker=None;self.trade_data=None;self._closed=False
@@ -134,8 +142,8 @@ class Companion(tk.Tk):
         ttk.Label(title,text='STAR VALOR  /  COMPANION',style='Muted.TLabel').pack(anchor='w')
         ttk.Label(title,textvariable=self.var('ship','Waiting for your ship'),style='Title.TLabel').pack(anchor='w',pady=(3,0))
         actions=ttk.Frame(header); actions.pack(side='right')
-        self.topmost=tk.BooleanVar(value=False)
-        ttk.Checkbutton(actions,text='Keep on top',variable=self.topmost,command=lambda:self.attributes('-topmost',self.topmost.get())).pack(side='left',padx=10)
+        self.launch_button=ttk.Button(actions,text='Launch Star Valor',command=self.launch_game)
+        self.launch_button.pack(side='left',padx=4)
         self.pause_button=ttk.Button(actions,text='Pause',command=self.pause); self.pause_button.pack(side='left',padx=4)
         ttk.Button(actions,text='Reconnect',command=self.reconnect).pack(side='left',padx=4)
         self.export_button=ttk.Button(actions,text='Export snapshot',command=self.export,state='disabled'); self.export_button.pack(side='left',padx=4)
@@ -161,6 +169,10 @@ class Companion(tk.Tk):
         # Reserve the global footer before the expanding notebook consumes space.
         tabs.pack_forget();footer.pack_forget()
         footer.pack(side='bottom',fill='x',pady=(12,0));tabs.pack(fill='both',expand=True)
+    def launch_game(self):
+        try:os.startfile('steam://rungameid/833360')
+        except OSError as exc:
+            messagebox.showerror('Could not launch Star Valor',f'Check that Steam is installed and available.\n\n{exc}',parent=self)
     def _overview(self,parent):
         cards=ttk.Frame(parent); cards.pack(fill='x')
         for col in range(4): cards.columnconfigure(col,weight=1,uniform='cards')
@@ -442,7 +454,7 @@ def main():
         app=Companion(start_paused=args.paused)
         for tab in app.tabs.tabs():
             if app.tabs.tab(tab,'text')==args.tab:app.tabs.select(tab);break
-        if args.keep_on_top:app.topmost.set(True);app.attributes('-topmost',True)
+        if args.keep_on_top:app.attributes('-topmost',True)
         try: app.mainloop()
         finally:
             if app.worker: app.worker.shutdown(); app.worker.join(timeout=2)
